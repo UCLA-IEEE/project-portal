@@ -7,6 +7,7 @@ user_bp = Blueprint('user', __name__)
 def create_user():
     data = request.get_json()
     new_user = controllers.user.create_user(data['name'], data['project'])
+    print('HI')
     return jsonify(new_user)
 
 @user_bp.route('/', methods=['GET'])
