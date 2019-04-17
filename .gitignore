@@ -1,6 +1,9 @@
 # For OSX
 .DS_Store
 
+# For VS Code
+.vscode
+
 # For python virtual environments
 venv
 
