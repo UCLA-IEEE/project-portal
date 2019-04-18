@@ -1,12 +1,20 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, abort
 import controllers.user
+from common.errors import error, ResourceExistsError, ResourceDoesNotExistError
 
 user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/', methods=['POST'])
 def create_user():
     data = request.get_json()
-    new_user = controllers.user.create_user(data['name'], data['project'])
+
+    try:
+        new_user = controllers.user.create_user(data['name'], data['project'])
+    except KeyError:
+        return error('bad request')
+    except ResourceExistsError:
+        return error('user already exists')
+
     return jsonify(new_user)
 
 @user_bp.route('/', methods=['GET'])
@@ -14,7 +22,19 @@ def get_all_users():
     users = controllers.user.get_all_users()
     return jsonify(users)
 
-@user_bp.route("/<name>")
+@user_bp.route("/<name>", methods=['GET', 'DELETE'])
 def get_user(name):
-    user_obj = controllers.user.get_user(name)
-    return jsonify(user_obj)
+    if request.method == 'GET':
+        try:
+            user_obj = controllers.user.get_user(name)
+            return jsonify(user_obj)
+        except ResourceDoesNotExistError:
+            return error(f"User '{name}' not found.", 404)
+
+    elif request.method == 'DELETE':
+        try:
+            user_obj = controllers.user.delete_user(name)
+            return jsonify(user_obj)
+        except ResourceDoesNotExistError:
+            return error(f"User '{name}' not found.", 404)
+        
