@@ -43,7 +43,6 @@ def get_all_users():
     return User.query.all()
 
 def get_user(name):
-<<<<<<< HEAD
     if not does_user_exist(name):
         raise ResourceDoesNotExistError
 
@@ -58,8 +57,3 @@ def delete_user(name):
     db.session.commit()
 
     return user
-=======
-    #for user in users:
-       # if user['name'] == name:
-            return user
->>>>>>> temp changes

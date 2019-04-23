@@ -54,4 +54,8 @@ def delete_project(name):
     db.session.delete(project)
     db.session.commit()
 
+<<<<<<< HEAD
     return project
+=======
+return project
+>>>>>>> 2b18dc803bbd26c6094352f2e31859c7437cc7dc
