@@ -14,4 +14,4 @@ def get_project(name):
 
 def delete_project(name):
     project = model.project.delete_project(name)
-return project.to_dict()
+    return project.to_dict()

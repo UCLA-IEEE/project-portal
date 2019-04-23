@@ -15,7 +15,7 @@ class Project(db.Model):
         }
 
 # Add test data
-test_users = [
+test_projects = [
     Project(name="OPS", description="circuits"),
     Project(name="Micromouse", project="autonomous maze-solving robot")
 ]
@@ -54,4 +54,4 @@ def delete_project(name):
     db.session.delete(project)
     db.session.commit()
 
-return project
+    return project
