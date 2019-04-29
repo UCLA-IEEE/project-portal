@@ -17,18 +17,18 @@ class User(db.Model):
         }
 
 # Add test data
-test_users = [
-    User(name="robert", project="Micromouse"),
-    User(name="maggie", project="OPS")
-]
+#test_users = [
+#   User(name="robert", project="Micromouse"),
+#    User(name="maggie", project="OPS")
+#]
 
 def does_user_exist(name):
     return User.query.filter_by(name=name).count() != 0
 
-for user in test_users:
-    if not does_user_exist(user.name):
-        db.session.add(user)
-        db.session.commit()
+#for user in test_users:
+    #if not does_user_exist(user.name):
+        #db.session.add(user)
+       # db.session.commit()
 
 def create_user(name, project):
     if does_user_exist(name):

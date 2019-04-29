@@ -9,5 +9,6 @@ db = SQLAlchemy(app)
 
 # Here because of circular imports 
 from routes.user import user_bp
-
+from routes.assignment import assignment_bp
 app.register_blueprint(user_bp, url_prefix='/user')
+app.register_blueprint(assignment_bp, url_prefix ='/assignment')
