@@ -1,7 +1,7 @@
 import model.user
 
-def create_user(name, project):
-    new_user = model.user.create_user(name, project)
+def create_user(data):
+    new_user = model.user.create_user(data)
     return new_user.to_dict()
 
 def get_all_users():

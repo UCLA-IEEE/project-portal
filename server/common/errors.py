@@ -8,3 +8,6 @@ class ResourceExistsError(Exception):
 
 class ResourceDoesNotExistError(Exception):
     pass
+
+class MissingFieldsError(Exception):
+    pass
