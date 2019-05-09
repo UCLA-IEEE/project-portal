@@ -11,3 +11,8 @@ db = SQLAlchemy(app)
 from routes.user import user_bp
 
 app.register_blueprint(user_bp, url_prefix='/user')
+
+# Simple route for testing purposes
+@app.route("/")
+def hello():
+    return 'hello'
