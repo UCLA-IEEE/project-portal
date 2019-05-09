@@ -22,6 +22,7 @@ class User(db.Model):
             'email': self.email,
             'name': self.name,
             'role': self.role
+            # 'assignments': [assignment.name for assignment in self.assignments]
         }
 
     def check_pw(self, raw):
@@ -32,27 +33,25 @@ def does_user_exist(name):
 
 def create_user(user_data):
     try:
-        if does_user_exist(user_data['username']):
-            raise ResourceExistsError
-    except KeyError:
-        raise MissingFieldsError
-
-    try:
-        salt = bcrypt.getsalt()
-        hashed = bcrypt.hashpw(data['password'])
+        salt = bcrypt.gensalt()
+        hashed = bcrypt.hashpw(user_data['password'].encode('utf-8'), salt)
 
         new_user = User(
-            username=data['username'],
-            email=data['email'],
-            name=data['name'],
-            role=['member'],
+            username=user_data['username'],
+            email=user_data['email'],
+            name=user_data['name'],
+            role=user_data['role'],
             password=hashed
         )
     except KeyError:
         raise MissingFieldsError
     
-    db.session.add(new_user)
-    db.session.commit()
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+    except sqlalchemy.exc.IntegrityError:
+        raise ResourceExistsError
+
     return new_user
 
 def get_all_users():
