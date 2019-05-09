@@ -11,6 +11,7 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable=False)
     name = db.Column(db.String(80), nullable=False)
     role = db.Column(db.String(20), nullable=False)
+    completed_assignments = db.relationship('Assignment', backref = 'user', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -33,8 +34,14 @@ def does_user_exist(name):
 
 def create_user(user_data):
     try:
+        if does_user_exist(user_data['username']):
+            raise ResourceExistsError
+    except KeyError:
+        raise MissingFieldsError
+
+    try:
         salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(user_data['password'].encode('utf-8'), salt)
+        hashed = bcrypt.hashpw(data['password'])
 
         new_user = User(
             username=user_data['username'],
@@ -62,7 +69,6 @@ def get_user(name):
         raise ResourceDoesNotExistError
 
     return User.query.filter_by(name=name).first()
-
 def delete_user(name):
     if not does_user_exist(name):
         raise ResourceDoesNotExistError
@@ -72,3 +78,13 @@ def delete_user(name):
     db.session.commit()
 
     return user
+
+def add_completed_assignment(u_name, a_name):
+    if not does_user_exist(name):
+        raise ResourceDoesNotExistError
+    
+    a = Assignment(name=a_name, user=u_name)
+    user = User.query.filter_by(name=u_name).first();
+    user.completed_assignments.append(a);
+
+    return a
