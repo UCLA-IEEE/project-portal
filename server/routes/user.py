@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort
 import controllers.user
-from common.errors import error, ResourceExistsError, ResourceDoesNotExistError
+from common.errors import error, ResourceExistsError, ResourceDoesNotExistError, MissingFieldsError
 
 user_bp = Blueprint('user', __name__)
 
@@ -9,11 +9,13 @@ def create_user():
     data = request.get_json()
 
     try:
-        new_user = controllers.user.create_user(data['name'], data['project'])
+        new_user = controllers.user.create_user(data)
     except KeyError:
         return error('bad request')
     except ResourceExistsError:
         return error('user already exists')
+    except MissingFieldsError:
+        return error('did not specify correct fields')
 
     return jsonify(new_user)
 
@@ -37,4 +39,3 @@ def get_user(name):
             return jsonify(user_obj)
         except ResourceDoesNotExistError:
             return error(f"User '{name}' not found.", 404)
-        

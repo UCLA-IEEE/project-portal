@@ -9,7 +9,7 @@
 - Activate virtual environment: `. ./venv/bin/activate`
 - Install required dependencies: `pip install -r requirements.txt`
 - Set up the database (see below)
-- Start the Flask server: `flask run`
+- Start the Flask server: `flask run`. Use `flask run --host='0.0.0.0'` to make the server accessible to the outside world.
 
 You will probably also need to create the DB at some point on your local machine (there should be some script or something... eventually).
 

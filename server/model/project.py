@@ -2,6 +2,7 @@ from app import db
 from common.errors import ResourceExistsError, ResourceDoesNotExistError
 
 class Project(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     description = db.Column(db.String(120), nullable=False)
 
@@ -17,7 +18,7 @@ class Project(db.Model):
 # Add test data
 test_projects = [
     Project(name="OPS", description="circuits"),
-    Project(name="Micromouse", project="autonomous maze-solving robot")
+    Project(name="Micromouse", description="autonomous maze-solving robot")
 ]
 
 def does_project_exist(name):
@@ -54,8 +55,4 @@ def delete_project(name):
     db.session.delete(project)
     db.session.commit()
 
-<<<<<<< HEAD
     return project
-=======
-return project
->>>>>>> 2b18dc803bbd26c6094352f2e31859c7437cc7dc
