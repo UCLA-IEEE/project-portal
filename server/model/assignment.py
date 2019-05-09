@@ -1,3 +1,6 @@
+import sqlalchemy
+import bcrypt
+
 from app import db
 from common.errors import ResourceExistsError, ResourceDoesNotExistError
 
@@ -5,6 +8,7 @@ class Assignment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Assignment %r>' % self.name
@@ -13,7 +17,8 @@ class Assignment(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'content': self.content
+            'content': self.content,
+            'user_id': self.user_id
         }
 
 def does_assignment_exist(name):

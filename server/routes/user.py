@@ -40,3 +40,17 @@ def get_user(name):
         except ResourceDoesNotExistError:
             return error(f"User '{name}' not found.", 404)
 
+@user_bp.route("/<name>", methods=['POST'])
+def add_completed_assignment(a_name, u_name):
+    data = request.get_json()
+
+    try:
+        assignment = controllers.user.add_completed_assignment(a_name, u_name)
+    except KeyError:
+        return error('bad request')
+    except ResourceExistsError:
+        return error('user already exists')
+    except MissingFieldsError:
+        return error('did not specify correct fields')
+
+    return jsonify(assignment)
