@@ -17,11 +17,6 @@ export default {
     return {
       links: [
         {
-          id: 0,
-          text: 'Home',
-          page:'/'
-        },
-        {
           id: 1,
           text: 'OPS',
           page:'/OPS'
@@ -35,6 +30,11 @@ export default {
           id: 3,
           text: 'Aircopter',
           page:'/Aircopter'
+        },
+        {
+          id: 0,
+          text: 'Sign In',
+          page:'/Login'
         }
       ]
     }
