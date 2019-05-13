@@ -1,8 +1,10 @@
 <template>
-  <div class="tile">
-    <p class="title">{{post.title}}</p>
-    <p class="body">{{post.body|truncate}}</p>
-  </div>
+  <a :href="post.link">
+    <div class="tile">
+      <p class="title">{{post.title}}</p>
+      <p class="body">{{post.body|truncate}}</p>
+    </div>
+  </a>
 </template>
 
 <script>
@@ -30,18 +32,16 @@ export default {
   background-color: white;
 }
 .title {
-  text-align: left;
   margin: 0px 0px 7px 0px;
 
-  text-align: left;
-  font-size: 14px;
-  font-weight: 500;
   text-transform: uppercase;
   color: #1F6891;
 }
 .body {
   margin: auto;
-
+}
+a {
+  text-transform: none;
   text-align: left;
   font-size: 14px;
   font-weight: 500;
