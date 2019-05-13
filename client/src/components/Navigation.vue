@@ -51,7 +51,7 @@ export default {
   }
   .logo {
     float: left;
-    width: 45px;
+    width: 280px;
   }
   .project-list {
     float: right;
