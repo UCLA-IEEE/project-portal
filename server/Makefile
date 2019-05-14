@@ -1,11 +1,11 @@
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-activate:
-	. ${ROOT_DIR}/venv/bin/activate
+run:
+	flask run --host=0.0.0.0
 
-reload: activate
+reload:
 	python db-restart.py
 
-test: activate
+test:
 	pytest ${ROOT_DIR}/tests -W ignore::DeprecationWarning
 
