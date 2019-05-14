@@ -1,10 +1,8 @@
 <template>
-  <a :href="post.link">
-    <div class="tile">
-      <p class="title">{{post.title}}</p>
-      <p class="body">{{post.body|truncate}}</p>
-    </div>
-  </a>
+  <div class="tile">
+    <p class="title">{{post.title}}</p>
+    <p class="body">{{post.body|truncate}}</p>
+  </div>
 </template>
 
 <script>
