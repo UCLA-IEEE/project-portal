@@ -28,8 +28,8 @@ class User(db.Model):
     def check_pw(self, raw):
         return bcrypt.checkpw(raw, self.password) == self.password
 
-def does_user_exist(name):
-    return User.query.filter_by(name=name).count() != 0
+def does_user_exist(username):
+    return User.query.filter_by(username=username).count() != 0
 
 def create_user(user_data):
     try:
@@ -57,17 +57,17 @@ def create_user(user_data):
 def get_all_users():
     return User.query.all()
 
-def get_user(name):
-    if not does_user_exist(name):
+def get_user(username):
+    if not does_user_exist(username):
         raise ResourceDoesNotExistError
 
-    return User.query.filter_by(name=name).first()
+    return User.query.filter_by(username=username).first()
 
-def delete_user(name):
-    if not does_user_exist(name):
+def delete_user(username):
+    if not does_user_exist(username):
         raise ResourceDoesNotExistError
     
-    user = User.query.filter_by(name=name).first()
+    user = User.query.filter_by(username=username).first()
     db.session.delete(user)
     db.session.commit()
 
