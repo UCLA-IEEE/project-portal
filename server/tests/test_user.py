@@ -13,7 +13,7 @@ def create_user(client):
     
     return rv
 
-def test_user_basic_post_and_get(client):
+def test_user_basic_post_get_delete(client):
     # Create a sample user
     post = create_user(client)
     assert post.status_code == 200
@@ -44,6 +44,20 @@ def test_user_basic_post_and_get(client):
 
     # Do not want the server to send back the password
     assert 'password' not in rv.json
+
+    # Delete the user
+    rv = client.delete('/user/{}'.format(username))
+    assert rv.status_code == 200
+
+    # Try to get back the deleted user for a 404
+    rv = client.get('/user/{}'.format(username))
+    print(rv.json)
+    assert rv.status_code == 404
+
+    # Ensure that no users left at all
+    rv = client.get('/user/')
+    assert rv.status_code == 200
+    assert len(rv.json) == 0
 
 def test_user_empty_post_400(client):
     # No json, should give us an error
