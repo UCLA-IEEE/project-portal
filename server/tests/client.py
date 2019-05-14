@@ -1,16 +1,14 @@
 import pytest
-from app import app
+from app import app, db
+from load_mock_data import load
 
 @pytest.fixture
 def client():
-    db_fd, flaskr.app.config['DATABASE'] = tempfile.mkstemp()
-    flaskr.app.config['TESTING'] = True
-    client = flaskr.app.test_client()
+    app.config['DATABASE'] = 'sqlite:////tmp/testing.db'
+    app.testing = True
+    client = app.test_client()
 
-    with flaskr.app.app_context():
-        flaskr.init_db()
+    db.drop_all()
+    db.create_all()
 
     yield client
-
-    os.close(db_fd)
-    os.unlink(flaskr.app.config['DATABASE'])

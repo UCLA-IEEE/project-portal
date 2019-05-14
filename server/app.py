@@ -15,4 +15,4 @@ app.register_blueprint(user_bp, url_prefix='/user')
 # Simple route for testing purposes
 @app.route("/")
 def hello():
-    return 'hello'
+    return '<p>Hello from Project Portal API<p>'
