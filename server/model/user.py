@@ -11,7 +11,6 @@ class User(db.Model):
     password = db.Column(db.String(120), nullable=False)
     name = db.Column(db.String(80), nullable=False)
     role = db.Column(db.String(20), nullable=False)
-    completed_assignments = db.relationship('Assignment', backref = 'user', lazy=True)
 
     def __repr__(self):
         return '<User %r>' % self.name

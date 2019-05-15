@@ -1,11 +1,12 @@
 from app import db
 from common.errors import ResourceExistsError, ResourceDoesNotExistError
+from model.assignment import Assignment, does_assignment_exist
 
 class Project(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), unique=True, nullable=False)
     description = db.Column(db.String(120), nullable=False)
-
+    assignments = db.relationship('Assignment', backref='project', lazy=True)
     def __repr__(self):
         return '<Project %r>' % self.name
     
@@ -15,19 +16,19 @@ class Project(db.Model):
             'description': self.description
         }
 
-# Add test data
-test_projects = [
-    Project(name="OPS", description="circuits"),
-    Project(name="Micromouse", description="autonomous maze-solving robot")
-]
+# # Add test data
+# test_projects = [
+#     Project(name="OPS", description="circuits"),
+#     Project(name="Micromouse", description="autonomous maze-solving robot")
+# ]
 
 def does_project_exist(name):
     return Project.query.filter_by(name=name).count() != 0
 
-for project in test_projects:
-    if not does_project_exist(project.name):
-        db.session.add(project)
-        db.session.commit()
+# for project in test_projects:
+#     if not does_project_exist(project.name):
+#         db.session.add(project)
+#         db.session.commit()
 
 def create_project(name, description):
     if does_project_exist(name):
@@ -56,3 +57,13 @@ def delete_project(name):
     db.session.commit()
 
     return project
+
+def add_assignment(p_name, a_name):
+    if not does_assignment_exist(a_name):
+        raise ResourceDoesNotExistError
+    project = Project.query.filter_by(name=p_name).first()
+    assignment = Assignment.query.filter_by(name=a_name).first()
+
+    project.assignments.append(assignment)
+    return assignment
+    

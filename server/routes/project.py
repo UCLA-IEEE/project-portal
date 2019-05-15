@@ -37,3 +37,16 @@ def get_project(name):
             return jsonify(project_obj)
         except ResourceDoesNotExistError:
             return error(f"Project '{name}' not found.", 404)
+
+@project_bp.route("/project/", methods=['POST'])
+def add_assignment():
+    data = request.get_json()
+
+    try:
+        added_assignment = controllers.project.add_assignment(data['project'], data['assignment'])
+    except KeyError:
+        return error('bad request')
+    except ResourceExistsError:
+        return error('Assignment/Project does not exist')
+
+    return jsonify(added_assignment)
