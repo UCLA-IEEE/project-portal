@@ -41,11 +41,11 @@ def get_user(name):
             return error(f"User '{name}' not found.", 404)
 
 @user_bp.route("/<name>", methods=['POST'])
-def add_completed_assignment(a_name, u_name):
+def add_completed_assignment():
     data = request.get_json()
 
     try:
-        assignment = controllers.user.add_completed_assignment(a_name, u_name)
+        assignment = controllers.user.add_completed_assignment(data)
     except KeyError:
         return error('bad request')
     except ResourceExistsError:

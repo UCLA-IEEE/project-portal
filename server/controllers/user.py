@@ -16,6 +16,6 @@ def delete_user(name):
     user = model.user.delete_user(name)
     return user.to_dict()
 
-def add_completed_assignment(a_name, u_name):
-    assignment = model.user.add_completed_assignment
+def add_completed_assignment(data):
+    assignment = model.user.add_completed_assignment(data)
     return assignment.to_dict()

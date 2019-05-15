@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id = "navbar">
     <h1>Aircopter</h1>
     <p>Here is some information. This is the Aircopter page</p>
   </div>

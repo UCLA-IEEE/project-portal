@@ -26,21 +26,12 @@ class User(db.Model):
             # 'assignments': [assignment.name for assignment in self.assignments]
         }
 
-<<<<<<< HEAD
     def check_pw(self, raw):
         return bcrypt.checkpw(raw, self.password) == self.password
-=======
-# Add test data
-#test_users = [
-#   User(name="robert", project="Micromouse"),
-#    User(name="maggie", project="OPS")
-#]
->>>>>>> 785113f83912cf5ba918efa93a4b770b5687a46e
 
 def does_user_exist(name):
     return User.query.filter_by(name=name).count() != 0
 
-<<<<<<< HEAD
 def create_user(user_data):
     try:
         if does_user_exist(user_data['username']):
@@ -50,13 +41,7 @@ def create_user(user_data):
 
     try:
         salt = bcrypt.gensalt()
-        hashed = bcrypt.hashpw(data['password'])
-=======
-#for user in test_users:
-    #if not does_user_exist(user.name):
-        #db.session.add(user)
-       # db.session.commit()
->>>>>>> 785113f83912cf5ba918efa93a4b770b5687a46e
+        hashed = bcrypt.hashpw(user_data['password'].encode('utf-8'), salt)
 
         new_user = User(
             username=user_data['username'],
@@ -94,8 +79,8 @@ def delete_user(name):
 
     return user
 
-def add_completed_assignment(u_name, a_name):
-    if not does_user_exist(name):
+def add_completed_assignment(data):
+    if not does_user_exist(data['name']):
         raise ResourceDoesNotExistError
     
     a = Assignment(name=a_name, user=u_name)
