@@ -7,6 +7,8 @@ user_bp = Blueprint('user', __name__)
 @user_bp.route('/', methods=['POST'])
 def create_user():
     data = request.get_json()
+    if not data:
+        return error('must include user creation data')
 
     try:
         new_user = controllers.user.create_user(data)
@@ -24,21 +26,21 @@ def get_all_users():
     users = controllers.user.get_all_users()
     return jsonify(users)
 
-@user_bp.route("/<name>", methods=['GET', 'DELETE'])
-def get_user(name):
+@user_bp.route("/<username>", methods=['GET', 'DELETE'])
+def get_user(username):
     if request.method == 'GET':
         try:
-            user_obj = controllers.user.get_user(name)
+            user_obj = controllers.user.get_user(username)
             return jsonify(user_obj)
         except ResourceDoesNotExistError:
-            return error(f"User '{name}' not found.", 404)
+            return error(f"User '{username}' not found.", 404)
 
     elif request.method == 'DELETE':
         try:
-            user_obj = controllers.user.delete_user(name)
+            user_obj = controllers.user.delete_user(username)
             return jsonify(user_obj)
         except ResourceDoesNotExistError:
-            return error(f"User '{name}' not found.", 404)
+            return error(f"User '{username}' not found.", 404)
 
 @user_bp.route("/<name>", methods=['POST'])
 def add_completed_assignment():

@@ -8,14 +8,10 @@ def get_all_users():
     users = model.user.get_all_users()
     return [user.to_dict() for user in users]
 
-def get_user(name):
-    user = model.user.get_user(name)
+def get_user(username):
+    user = model.user.get_user(username)
     return user.to_dict()
 
-def delete_user(name):
-    user = model.user.delete_user(name)
+def delete_user(username):
+    user = model.user.delete_user(username)
     return user.to_dict()
-
-def add_completed_assignment(data):
-    assignment = model.user.add_completed_assignment(data)
-    return assignment.to_dict()
