@@ -36,4 +36,4 @@ def get_project(name):
             project_obj = controllers.project.delete_project(name)
             return jsonify(project_obj)
         except ResourceDoesNotExistError:
-return error(f"Project '{name}' not found.", 404)
+            return error(f"Project '{name}' not found.", 404)
