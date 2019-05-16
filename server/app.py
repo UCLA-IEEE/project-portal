@@ -9,5 +9,12 @@ db = SQLAlchemy(app)
 
 # Here because of circular imports 
 from routes.user import user_bp
-
 app.register_blueprint(user_bp, url_prefix='/user')
+
+from routes.auth import auth_bp
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+# Simple route for testing purposes
+@app.route("/")
+def hello():
+    return '<p>Hello from Project Portal API<p>'

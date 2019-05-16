@@ -1,0 +1,12 @@
+language: python
+
+python:
+    - "3.6"
+
+# install dependencies
+install: 
+  - pip install -r server/requirements.txt
+
+# run scripts
+script:
+  - cd server && make test
