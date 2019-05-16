@@ -69,6 +69,6 @@ export default {
 
 <style>
 .listing {
-  margin: 50px 200px;
+  margin: 50px 10%;
 }
 </style>
