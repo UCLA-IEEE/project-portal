@@ -41,4 +41,3 @@ def get_user(username):
             return jsonify(user_obj)
         except ResourceDoesNotExistError:
             return error(f"User '{username}' not found.", 404)
-
