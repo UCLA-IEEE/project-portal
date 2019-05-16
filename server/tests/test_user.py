@@ -10,7 +10,6 @@ sample_user = {
 
 def create_user(client):
     rv = client.post('/user/', json=sample_user)
-    
     return rv
 
 def test_user_basic_post_get_delete(client):
@@ -67,3 +66,4 @@ def test_user_empty_post_400(client):
 def test_user_bad_post_400(client):
     rv = client.post('/user/', json={'field': 'random'})
     assert rv.status_code == 400
+
