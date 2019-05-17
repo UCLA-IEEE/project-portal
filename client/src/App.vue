@@ -11,11 +11,7 @@ export default {
   name: 'app',
   data() {
     return {
-      authenticated: false,
-      mockAccount: {
-        username: "ieee-test",
-        password: "password"
-      }
+      authenticated: false
     }
   },
   mounted() {

@@ -1,38 +1,45 @@
 <template>
     <div id="login">
         <h1>Login</h1>
-        <p>Sign in to track your project progress!</p>
+        <p class='subtitle'>Sign in to track your project progress!</p>
         <label for="username">Email</label>
-        <input id='username' type="text" name="username" v-model="input.username" placeholder="joebruin@g.ucla.edu" />
+        <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu" :class="{ 'is-invalid': submitted && !username }"/>
         <label for="password">Password</label>
-        <input id='password' type="text" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
+        <input type="text" id='password' name="password" v-model="password" placeholder="Password" :class="{ 'is-invalid': submitted && !password }"/>
+        <p class='error-message' v-show="submitted && (!password || !username)">Username or password cannot be empty.</p>
+        <button type="button" v-on:click="handleSubmit()">Login</button>
     </div>
 </template>
 
 <script>
+    import { userService } from '../services';
     export default {
         name: 'Login',
         data() {
             return {
-                input: {
-                    username: "",
-                    password: ""
-                }
+                username: '',
+                password: '',
+                submitted: false
             }
         },
         methods: {
-            login() {
-                if(this.input.username != "" && this.input.password != "") {
-                    if(this.input.username == this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
-                        this.$emit("authenticated", true);
-                        this.$router.replace({ name: "Secure" });
-                    } else {
-                        console.log("The username and / or password is incorrect");
-                    }
-                } else {
-                    console.log("A username and password must be present");
-                }
+            handleSubmit() {
+              this.submitted = true;
+              const { username, password } = this;
+
+              // stop here if form is invalid
+              if (!(username && password)) {
+                return;
+              }
+
+              userService.login(username, password)
+              .then( value => {
+                this.$emit("authenticated", true);
+                this.$router.replace({ name: "Secure" });
+              })
+              .catch( err => {
+                console.log("Invalid user!");
+              })
             }
         }
     }
@@ -53,7 +60,7 @@
       text-transform: uppercase;
       margin: 0;
     }
-    #login p {
+    .subtitle {
       font-size: 14px;
       margin: 0 0 10px 0;
     }
@@ -81,5 +88,10 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       box-sizing: border-box;
+    }
+    .error-message {
+      color: #d02626;
+      margin: 0 0 10px 0;
+      font-size: 12px;
     }
 </style>

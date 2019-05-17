@@ -83,7 +83,6 @@ export default {
   }
   button a:hover {
     border-bottom: none;
-    color: white;
   }
   a {
     color: black;
