@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1>Aircopter</h1>
-    <p>Here is some information. This is the Aircopter page</p>
+    <h1 class="page-title">Aircopter</h1>
     <SpecListing project="Aircopter"/>
   </div>
 </template>
@@ -16,4 +15,20 @@ export default {
 }
 </script>
 <style>
+.page-title {
+  position: absolute;
+  left: 150px;
+  top: 90px;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 24px;
+  color: #1F6891;
+}
+
+@media all and (max-width: 950px) {
+  .page-title {
+    left: 35px;
+  }
+}
 </style>
