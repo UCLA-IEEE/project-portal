@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">Aircopter</h1>
+    <h1 class="ap-title">Aircopter</h1>
     <SpecListing project="Aircopter"/>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
 }
 </script>
 <style>
-.page-title {
+.ap-title {
   position: absolute;
   left: 150px;
   top: 90px;
@@ -27,7 +27,7 @@ export default {
 }
 
 @media all and (max-width: 950px) {
-  .page-title {
+  .ap-title {
     left: 35px;
   }
 }

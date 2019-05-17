@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">Open Project Space</h1>
+    <h1 class="ops-title">Open Project Space</h1>
     <SpecListing project="OPS"/>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style>
-.page-title {
+.ops-title {
   position: absolute;
   left: 150px;
   top: 90px;
@@ -28,7 +28,7 @@ export default {
 }
 
 @media all and (max-width: 950px) {
-  .page-title {
+  .ops-title {
     left: 35px;
   }
 }
