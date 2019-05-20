@@ -26,8 +26,8 @@
 
             <hr size = "1" align="center" color="#1F6891">
 
-
             <p1> {{info}}</p1>
+
 
 
   </div>
@@ -49,9 +49,15 @@ export default {
         sub2: 'SLIDES:',
         slides: "docs.google.com/presentation/d/1UpyU5qLMTIgDtMDBkq9CGz9JT-MZ4gQVW8FJmqpywI4/edit?usp=sharing",
         about: "ABOUT THE PROJECT",
-        info: `This is a lot of dummy text about the project that is being described in this spec, soldering, breadboards, schematic, IEEE lab, OPS
-         In this project, you will be making an LED light up! The first step will be to create the circuit from the schematic on your breadboard. Do this by using your knowledge of breadboards, and bending your component leads 90 degrees and sticking them in the breadboard. After you've done that, bring it to an officer to look at and they'll ask you some questions about it. Then, you'll solder your circuit to a perfboard. Keep a look out for sign up times for soldering with supervision! In summary, this project entails:  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  adding more to see how the box responds to browser  responds to browser `
+        info: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus euismod mi et porta sagittis. Fusce rutrum orci sed iaculis porta. Suspendisse egestas eleifend nunc non lobortis. Quisque orci sapien, sagittis elementum mollis dapibus, vestibulum vel arcu. Mauris quis ex ac urna scelerisque cursus quis at tortor. Duis dignissim faucibus magna vel mollis. Vestibulum at vehicula lorem, quis tempus mi. In eget enim magna. Proin ultrices congue quam, bibendum malesuada metus cursus at. Vivamus feugiat nibh sed lorem faucibus efficitur. Sed a est at purus ullamcorper dignissim.
 
+Nullam est libero, consequat quis metus ut, convallis volutpat risus. Sed vitae sagittis nunc, vel ultrices nisl. Vestibulum vitae lacinia augue. Duis vitae libero mauris. Duis rutrum sit amet nisl tincidunt maximus. Vivamus tristique justo at arcu lacinia, ac varius turpis sollicitudin. Morbi eu velit rutrum, venenatis neque a, vehicula risus. Nullam posuere dictum dolor quis pellentesque. Praesent fringilla commodo malesuada. Nam scelerisque, massa sed elementum malesuada, libero diam varius lacus, in aliquam tortor lorem ut metus. Aliquam luctus felis facilisis tellus faucibus suscipit. Praesent metus diam, accumsan eget dolor non, facilisis cursus libero. Donec venenatis dolor sed mollis tempor.
+
+In mattis tempor sollicitudin. Donec vitae faucibus quam, ultrices euismod mi. Aliquam molestie, odio sed fermentum tempus, arcu risus efficitur nisl, vel gravida massa erat vitae diam. Integer ut leo augue. Morbi tristique interdum convallis. Curabitur in ornare diam. Aliquam eleifend nunc vitae ante blandit maximus.
+
+Proin vel nisi sit amet diam interdum dapibus quis a dolor. Morbi dignissim blandit erat, ut vehicula leo vestibulum sit amet. Sed ante risus, fermentum quis rutrum sit amet, lacinia a est. Praesent non felis quis enim bibendum semper. Integer luctus gravida dui a vulputate. In dictum scelerisque varius. Donec tempus tempor bibendum. In quis lectus hendrerit, sodales magna eget, facilisis diam. Etiam et aliquet nulla. Quisque at est sit amet nisi ultricies molestie vel sed quam. Suspendisse potenti.
+
+Etiam bibendum eu dui ac suscipit. Nunc non ante justo. Praesent aliquet ullamcorper viverra. Pellentesque eleifend nisi placerat vulputate maximus. Integer aliquam fringilla nibh vel varius. Pellentesque ac tristique risus, a rutrum lectus. Aenean pretium enim et faucibus auctor. Maecenas sit amet suscipit purus. Morbi in mauris finibus, sollicitudin odio sed, pulvinar ex. Aliquam at nisi non justo dignissim semper. Donec vehicula enim scelerisque ante blandit, ut accumsan purus suscipit. Vestibulum rutrum faucibus ex, quis vehicula orci laoreet id.`
     }
   }
 }
@@ -62,7 +68,8 @@ export default {
 .box
 {
 margin-top: 65px;
-margin-left: 85px;
+margin-left: auto;
+margin-right: auto;
 width: 50%;
 height: 100%;
 padding-top: 25px;
