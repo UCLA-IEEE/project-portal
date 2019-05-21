@@ -1,14 +1,34 @@
 <template>
   <div>
-    <h1>Micromouse</h1>
-    <p>Here is some information. This is the Micromouse page</p>
+    <h1 class="mm-title">Micromouse</h1>
+    <SpecListing project="Micromouse"/>
   </div>
 </template>
 
 <script>
+import SpecListing from "./SpecListing"
 export default {
-  name: 'Micromouse' //this is the name of the component
+  name: 'Micromouse', //this is the name of the component
+  components: {
+    SpecListing
+  }
 }
 </script>
 <style>
+.mm-title {
+  position: absolute;
+  left: 150px;
+  top: 90px;
+
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 24px;
+  color: #1F6891;
+}
+
+@media all and (max-width: 950px) {
+  .mm-title {
+    left: 35px;
+  }
+}
 </style>

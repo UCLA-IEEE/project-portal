@@ -26,7 +26,7 @@ class User(db.Model):
         }
 
     def check_pw(self, raw):
-        return bcrypt.checkpw(raw, self.password) == self.password
+        return bcrypt.checkpw(raw.encode('utf-8'), self.password)
 
 def does_user_exist(username):
     return User.query.filter_by(username=username).count() != 0

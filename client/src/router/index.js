@@ -4,6 +4,7 @@ import Home from '@/components/Home'
 import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
 import Aircopter from '@/components/Aircopter'
+import Checkoffs from '@/components/Checkoffs'
 
 Vue.use(Router)
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/aircopter',
       name: 'Aircopter',
       component: Aircopter
+    },
+    {
+      path: '/checkoffs',
+      name: 'Checkoffs',
+      component: Checkoffs
     }
   ]
 })
