@@ -2,39 +2,28 @@
   <div class="container">
         <div class="checkoffs">
             <h1 class="title" id="checkoff-title">Checkoffs</h1>
-            <div v-for="project in projects" :key="project.id" class="project-progress">
-                <hr> 
-                <div id="title-block">
-                    <p>{{ project.title }} - {{ project.subtitle }}</p>
-                </div>
-                <div id="progress-block">
-                    <p>{{ project.progress }}%</p>
-                </div>
-            </div>       
+            <CheckoffTile v-for="project in projects" :project='project' :key="project.id"></CheckoffTile>
         </div>
-    
         <div class="roster">
             <div id="roster-contents">
                 <h1 class="title" id="roster-title">Roster</h1>
                 <hr>
-                <input type="text" placeholder="   Search members">
-                <div v-for="member in members" :key="member.id" class="member-progress">
-                    <div id="member-name">    
-                        <p>{{ member.name }}</p>
-                    </div>
-                    <div id="member-progress">
-                        <p>{{ member.progress }}%</p>
-                    </div>
-                </div>
+                <input type="text" placeholder="Search members">
+                <RosterTile v-for="member in members" :member='member' :key='member.id'></RosterTile>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import CheckoffTile from './CheckoffTile'
+import RosterTile from './RosterTile'
+
 export default {
   name: 'Checkoffs', //this is the name of the component
   components: {
+      CheckoffTile,
+      RosterTile
   },
   data() {
       return {
@@ -186,8 +175,8 @@ export default {
     .container {
     display: grid;
     grid-template-columns: 70% 30%;
-    margin: 25px 100px;
     grid-column-gap: 50px;
+    margin: 25px 100px;
     }
 
     .checkoffs {
@@ -195,7 +184,7 @@ export default {
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);   
         grid-column-start: 1;
         grid-column-end: 2;
-    }
+}
 
     .roster {
         text-align: left;
@@ -212,20 +201,6 @@ export default {
         margin-top: 25px;
     }
 
-    .project-progress {
-        margin: 0px 40px;
-        text-align: left;
-    }
-
-    .member-progress {
-        height: 30px;
-    }
-
-    #checkoff-title {  
-        font-size: 24px;
-        line-height: 32px;
-        text-align: center;
-    }
 
     #roster-title {
         font-size: 18px;
@@ -237,46 +212,19 @@ export default {
         line-height: 40px;
     }
 
-    #member-name {
-        font-weight: bold;
-        width: 60%;
-        display: inline-block;
-    }
-
     #member-progress {
         width: 30%;
         display: inline-block;
     }
-    #title-block {
-        font-weight: bold;
-        margin-left: 40px;
-        width: 60%;
-        display: inline-block;
-        height: 10px;
-    }
-
-    #progress-block {
-        width: 30%;
-        display: inline-block;
-        height: 10px;
-    }
-
-    
 
     input {
-        width: 100%;
         height: 24px;
         border: 1px solid rgb(124, 158, 179);
         border-radius: 5px;
+        padding-left: 10px;
+        width: 90%;
     }
 
-    hr {
-        background-color: #1F6891;
-        color: #1F6891;
-        height: 1px;
-        border: none;
-        width: 100%;
-    }
 
  
 
