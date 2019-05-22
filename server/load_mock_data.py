@@ -1,25 +1,29 @@
 from app import db
+<<<<<<< HEAD
 from model.user import User, does_user_exist
 from model.project import Project, does_project_exist
 from model.assignment import Assignment, does_assignment_exist
+=======
+from model.user import User, create_user, does_user_exist
+>>>>>>> 1aef29259506baa3a4e6e86ca4014b56f56563b8
 
 def load():
     # Add test data
     test_users = [
-        User(
-            username='rzalog',
-            email='rzalog@gmail.com',
-            name='Robert Zalog',
-            role='admin',
-            password='password'
-        ),
-        User(
-            username='maggie',
-            email='maggie@gmail.com',
-            name='Maggie Huang',
-            role='member',
-            password='password'
-        )
+        {
+            'username': 'rzalog',
+            'email': 'rzalog@gmail.com',
+            'name': 'Robert Zalog',
+            'role': 'admin',
+            'password': 'password'
+        },
+        {
+            'username': 'maggie',
+            'email': 'maggie@gmail.com',
+            'name': 'Maggie Huang',
+            'role': 'member',
+            'password': 'password'
+        }
     ]
     # Add test data
     test_projects = [
