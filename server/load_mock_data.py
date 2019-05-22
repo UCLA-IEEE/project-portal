@@ -1,11 +1,7 @@
 from app import db
-<<<<<<< HEAD
 from model.user import User, does_user_exist
 from model.project import Project, does_project_exist
 from model.assignment import Assignment, does_assignment_exist
-=======
-from model.user import User, create_user, does_user_exist
->>>>>>> 1aef29259506baa3a4e6e86ca4014b56f56563b8
 
 def load():
     # Add test data
@@ -39,16 +35,13 @@ def load():
     try:
         for user in test_users:
             if not does_user_exist(user.username):
-                db.session.add(user)
-                db.session.commit()
+                create_user(user.username)
         for project in test_projects:
             if not does_project_exist(project.name):
-                db.session.add(project)
-                db.session.commit()
+                create_project(project.name, project.description)
         for assignment in test_assignments:
             if not does_assignment_exist(assignment.name):
-                db.session.add(assignment)
-                db.session.commit()
+                create_assignment(assignment.name, assignment.content)
     except Exception as e:
         print("Could not load in mock data", e)
 

@@ -16,12 +16,6 @@ class Project(db.Model):
             'description': self.description
         }
 
-# # Add test data
-# test_projects = [
-#     Project(name="OPS", description="circuits"),
-#     Project(name="Micromouse", description="autonomous maze-solving robot")
-# ]
-
 def does_project_exist(name):
     return Project.query.filter_by(name=name).count() != 0
 
