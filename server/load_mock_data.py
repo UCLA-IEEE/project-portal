@@ -1,5 +1,5 @@
 from app import db
-from model.user import User, does_user_exist
+from model.user import User, does_user_exist, create_user
 from model.project import Project, does_project_exist
 from model.assignment import Assignment, does_assignment_exist
 
@@ -41,7 +41,7 @@ def load():
                 create_project(project.name, project.description)
         for assignment in test_assignments:
             if not does_assignment_exist(assignment.name):
-                create_assignment(assignment.name, assignment.content)
+                create_assignment(assignment.name, assignment)
     except Exception as e:
         print("Could not load in mock data", e)
 

@@ -40,23 +40,4 @@ def get_user(username):
             user_obj = controllers.user.delete_user(username)
             return jsonify(user_obj)
         except ResourceDoesNotExistError:
-<<<<<<< HEAD
             return error(f"User '{username}' not found.", 404)
-
-@user_bp.route("/<name>", methods=['POST'])
-def add_completed_assignment():
-    data = request.get_json()
-
-    try:
-        assignment = controllers.user.add_completed_assignment(data)
-    except KeyError:
-        return error('bad request')
-    except ResourceExistsError:
-        return error('user already exists')
-    except MissingFieldsError:
-        return error('did not specify correct fields')
-
-    return jsonify(assignment)
-=======
-            return error(f"User '{username}' not found.", 404)
->>>>>>> 1aef29259506baa3a4e6e86ca4014b56f56563b8
