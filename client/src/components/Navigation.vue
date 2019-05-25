@@ -2,9 +2,8 @@
   <div class='navbar'>
     <img class='logo' src='../../public/ieee-logo.png'>
     <ul class='project-list'>
-      <li class='project' v-for="routes in links">
-        <router-link v-bind:key="routes.id"
-        :to="`${routes.page}`">{{routes.text}}</router-link>
+      <li class='project' v-for="routes in links" :key="routes.id">
+        <router-link :to="`${routes.page}`">{{routes.text}}</router-link>
       </li>
     </ul>
   </div>
