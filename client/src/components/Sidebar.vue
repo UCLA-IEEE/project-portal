@@ -53,12 +53,7 @@ export default {
           id: 4,
           title: "Project 4 - I Love CS",
           link: "/Micromouse"
-        },
-        {
-          id: 5,
-          title: "Project 4 - I Love CS",
-          link: "/Micromouse"
-        },
+        }
       ],
     }
   },
