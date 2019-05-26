@@ -4,7 +4,11 @@
             <p>{{ project.title }} - {{ project.subtitle }}</p>
         </div>
         <div id="progress-block">
-            <p>{{ project.progress }}%</p>
+            <p id="percent">{{ calculatePercentage().toFixed(0) }}%</p>
+            <div id="total-progress">
+                <div id="current-progress"
+                :style="{ width: calculatePercentage() + '%'} "></div>
+            </div> 
         </div>
         <DropdownButton v-on:open='setOpen'></DropdownButton>
         <transition name='expand'>
@@ -20,7 +24,7 @@ export default {
     name: 'CheckoffTile',
     data() {
         return {
-            open: false 
+            open: false
         } 
     },
     components: {
@@ -32,6 +36,16 @@ export default {
     methods: {
         setOpen() {
             this.open = !this.open;
+        },
+        calculatePercentage() {
+            return (this.project.progress / this.project.total) * 100;
+        }
+        ,
+        addQuestion() {
+            this.project.total += 1;
+        },
+        completeQuestion() {
+            this.project.progress += 1;
         }
     }
 }
@@ -42,7 +56,7 @@ export default {
 <style>
 .project-progress {
     display: grid;
-    grid-template-columns: 60% 30% 10%;
+    grid-template-columns: 60% 35% 5%;
     grid-template-rows: auto auto;
     position: relative;
     margin: auto 40px;
@@ -85,11 +99,35 @@ export default {
 
 #progress-block {
     margin-top: 10px;
+    margin-right: 5px;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;
     position: relative;
+    display: grid;
+    grid-template-columns: 15% 85%;
+}
+
+#total-progress {
+    background-color: #EFEFEF;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    border-radius: 5px;
+
+}
+
+#current-progress {
+    background-color: #1F6891;
+    height: 100%;
+    border-radius: 5px;
+}
+
+#percent {
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
 
 button:focus {

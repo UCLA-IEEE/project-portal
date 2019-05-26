@@ -32,31 +32,36 @@ export default {
                   id: 1,
                   title: "Project 1",
                   subtitle: "Something Something",
-                  progress: 67
+                  progress: 2,
+                  total: 3
               },
               {
                   id: 2,
                   title: "Project 2",
                   subtitle: "Breadboarding: Checkpoint 1",
-                  progress: 67
+                  progress: 2,
+                  total: 3
               },
               {
                   id: 3,
                   title: "Project 2",
                   subtitle: "Breadboarding: Checkpoint 2",
-                  progress: 67
+                  progress: 1,
+                  total: 3
               },
               {
                   id: 4,
                   title: "Project 3",
                   subtitle: "I Love Computer Science",
-                  progress: 67
+                  progress: 2,
+                  total: 3
               },
               {
                   id: 5,
                   title: "Project 4",
                   subtitle: "Something pt 2: Electric Boogaloo",
-                  progress: 67
+                  progress: 1,
+                  total: 3
               }
           ],
           members: [
