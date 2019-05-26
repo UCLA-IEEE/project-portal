@@ -3,13 +3,12 @@
     <img class='logo' src='../../public/ieee-logo.png'>
     <ul class='project-list'>
       <li class='project' v-for="routes in links">
-        <button v-if="routes.id == 0">
-          <router-link v-bind:key="routes.id"
-          :to="`${routes.page}`">{{routes.text}}</router-link>
-        </button>
-        <router-link v-else v-bind:key="routes.id"
+        <router-link v-bind:key="routes.id"
         :to="`${routes.page}`">{{routes.text}}</router-link>
       </li>
+      <button>
+        <router-link v-if="!this.authenticated" :to="`/Login`">Sign In</router-link>
+      </button>
     </ul>
   </div>
 </template>
@@ -34,11 +33,6 @@ export default {
           id: 3,
           text: 'Aircopter',
           page:'/Aircopter'
-        },
-        {
-          id: 0,
-          text: 'Sign In',
-          page:'/Login'
         }
       ]
     }
@@ -64,7 +58,7 @@ export default {
   }
   .project {
     display: inline;
-    margin-left: 50px;
+    margin: 0 30px;
   }
   button {
     background-color: #1F6891;
@@ -72,6 +66,7 @@ export default {
     padding: 8px 20px;
     border: none;
     border-radius: 5px;
+    margin-left: 30px;
     transition: background-color 0.2s ease;
   }
   button:hover {
