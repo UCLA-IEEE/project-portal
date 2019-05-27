@@ -33,6 +33,12 @@ def does_user_exist(username):
 
 def create_user(user_data):
     try:
+        if does_user_exist(user_data['username']):
+            raise ResourceExistsError
+    except KeyError:
+        raise MissingFieldsError
+
+    try:
         salt = bcrypt.gensalt()
         hashed = bcrypt.hashpw(user_data['password'].encode('utf-8'), salt)
 
@@ -72,3 +78,13 @@ def delete_user(username):
     db.session.commit()
 
     return user
+
+def add_completed_assignment(data):
+    if not does_user_exist(data['name']):
+        raise ResourceDoesNotExistError
+    
+    a = Assignment(name=a_name, user=u_name)
+    user = User.query.filter_by(name=u_name).first();
+    user.completed_assignments.append(a);
+
+    return a

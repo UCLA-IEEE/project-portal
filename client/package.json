@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "perf_hooks": "0.0.1",
     "vue": "^2.6.6",
     "vue-router": "^3.0.3"
   },

@@ -5,6 +5,7 @@ import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
 import Aircopter from '@/components/Aircopter'
 import Spec from '@/components/Spec'
+import Checkoffs from '@/components/Checkoffs'
 
 Vue.use(Router)
 
@@ -34,6 +35,10 @@ export default new Router({
       path: '/spec',
       name: 'Spec',
       component: Spec
-    }
+    },
+    {
+      path: '/checkoffs',
+      name: 'Checkoffs',
+      component: Checkoffs}
   ]
 })
