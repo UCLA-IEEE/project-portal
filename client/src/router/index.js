@@ -15,27 +15,27 @@ export default new Router({
       redirect: '/Login'
     },
     {
-      path: '/Login',
+      path: '/login',
       name: 'Login',
       component: Login
     },
     {
-      path: '/OPS',
+      path: '/ops',
       name: 'OPS',
       component: OPS
     },
     {
-      path: '/Micromouse',
+      path: '/micromouse',
       name: 'Micromouse',
       component: Micromouse
     },
     {
-      path: '/Aircopter',
+      path: '/aircopter',
       name: 'Aircopter',
       component: Aircopter
     },
     {
-      path: '/Secure',
+      path: '/secure',
       name: 'Secure',
       component: Secure
     }
