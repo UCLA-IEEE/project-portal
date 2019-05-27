@@ -1,4 +1,4 @@
-# project-portal
+# Project Portal
 
 ### Server setup
 
@@ -9,9 +9,9 @@
 - Activate virtual environment: `. ./venv/bin/activate`
 - Install required dependencies: `pip install -r requirements.txt`
 - Set up the database (see below)
-- Start the Flask server: `flask run`
+- Start the Flask server: `make run`. Alternatively you can use the normal Flask command line tool: `flask run`.
 
-You will probably also need to create the DB at some point on your local machine (there should be some script or something... eventually).
+You will also need to create the DB at some point on your local machine before you can use anything (see below).
 
 Any other time you need to develop, all you need to do is `cd` into the `server` directory and activate your virtual environment again. 
 
