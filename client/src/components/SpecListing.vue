@@ -69,12 +69,14 @@ export default {
 
 <style>
 .listing {
-  margin: 90px 130px 130px;
+  margin-left: 130px;
+  margin-right: 40px;
 }
 
 @media all and (max-width: 950px) {
   .listing {
-    margin: 90px 15px 15px;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 </style>
