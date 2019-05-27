@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navigation></Navigation>
-    <router-view @authenticated="setAuthenticated" />
+    <Navigation @authenticated="updateAuthenticated"></Navigation>
+    <router-view @authenticated="updateAuthenticated"/>
   </div>
 </template>
 
@@ -20,11 +20,8 @@ export default {
     }
   },
   methods: {
-    setAuthenticated(status) {
-      this.authenticated = status;
-    },
-    logout() {
-      this.authenticated = false;
+    updateAuthenticated() {
+      this.authenticated = !this.authenticated;
     }
   },
   components: {

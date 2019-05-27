@@ -3,11 +3,11 @@
         <h1>Login</h1>
         <p class='subtitle'>Sign in to track your project progress!</p>
         <label for="username">Email</label>
-        <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu" :class="{ 'is-invalid': submitted && !username }"/>
+        <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu"/>
         <label for="password">Password</label>
-        <input type="text" id='password' name="password" v-model="password" placeholder="Password" :class="{ 'is-invalid': submitted && !password }"/>
+        <input type="text" id='password' name="password" v-model="password" placeholder="Password"/>
         <p class='error-message' v-show="submitted && (!password || !username)">Username or password cannot be empty.</p>
-        <button type="button" v-on:click="handleSubmit()">Login</button>
+        <button type="button" v-on:click="handleLogin()">Login</button>
     </div>
 </template>
 
@@ -23,7 +23,7 @@
             }
         },
         methods: {
-            handleSubmit() {
+            handleLogin() {
               this.submitted = true;
               const { username, password } = this;
 
@@ -31,7 +31,7 @@
               if (!(username && password)) {
                 return;
               }
-
+              
               userService.login(username, password)
               .then( value => {
                 this.$emit("authenticated", true);

@@ -2,12 +2,15 @@
   <div class='navbar'>
     <img class='logo' src='../../public/ieee-logo.png'>
     <ul class='project-list'>
-      <li class='project' v-for="routes in links">
+      <li class='project' v-for="routes in links" v-bind:key="routes.id">
         <router-link v-bind:key="routes.id"
         :to="`${routes.page}`">{{routes.text}}</router-link>
       </li>
-      <button>
-        <router-link v-if="!this.authenticated" :to="`/Login`">Sign In</router-link>
+      <button v-if="!this.$parent.authenticated">
+        <router-link :to="`/Login`">Sign In</router-link>
+      </button>
+      <button v-else v-on:click="handleLogout()">
+        <router-link :to="`/Login`">Sign Out</router-link>
       </button>
     </ul>
   </div>
@@ -35,6 +38,11 @@ export default {
           page:'/Aircopter'
         }
       ]
+    }
+  },
+  methods: {
+    handleLogout() {
+      this.$emit("authenticated", true);
     }
   }
 }
