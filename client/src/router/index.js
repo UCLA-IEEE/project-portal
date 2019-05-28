@@ -5,6 +5,7 @@ import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
 import Aircopter from '@/components/Aircopter'
 import Secure from '@/components/Secure'
+import Spec from '@/components/Spec'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
       path: '/secure',
       name: 'Secure',
       component: Secure
+    },
+    {
+      path: '/spec',
+      name: 'Spec',
+      component: Spec
     }
   ]
 })
