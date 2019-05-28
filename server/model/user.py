@@ -1,3 +1,5 @@
+import secrets
+
 import sqlalchemy
 import bcrypt
 
@@ -12,6 +14,10 @@ class User(db.Model):
     name = db.Column(db.String(80), nullable=False)
     role = db.Column(db.String(20), nullable=False)
 
+    # Used for email verification
+    verified = db.Column(db.Boolean, nullable=False, default=True)
+    verification_code = db.Column(db.String(16), nullable=False)
+
     def __repr__(self):
         return '<User %r>' % self.name
     
@@ -21,8 +27,8 @@ class User(db.Model):
             'username': self.username,
             'email': self.email,
             'name': self.name,
-            'role': self.role
-            # 'assignments': [assignment.name for assignment in self.assignments]
+            'role': self.role,
+            'verified': self.verified
         }
 
     def check_pw(self, raw):
@@ -41,11 +47,17 @@ def create_user(user_data):
             email=user_data['email'],
             name=user_data['name'],
             role=user_data['role'],
-            password=hashed
+            password=hashed,
+
+            # Generate random bytes to verify email
+            verified=False,
+            verification_code=secrets.token_urlsafe(16)
         )
     except KeyError:
         raise MissingFieldsError
     
+    # Need to send out verification email
+
     try:
         db.session.add(new_user)
         db.session.commit()
@@ -62,6 +74,12 @@ def get_user(username):
         raise ResourceDoesNotExistError
 
     return User.query.filter_by(username=username).first()
+
+def get_user_by_verification(code):
+    user = User.query.filter_by(verification_code=code).first()
+    if not user:
+        raise ResourceDoesNotExistError('invalid verification code')
+    return user
 
 def delete_user(username):
     if not does_user_exist(username):

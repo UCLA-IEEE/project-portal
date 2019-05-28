@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
-from model.user import get_user
+
+from app import db
+from model.user import get_user, get_user_by_verification
 from common.errors import error, ResourceExistsError, ResourceDoesNotExistError, MissingFieldsError
 
 auth_bp = Blueprint('auth', __name__)
@@ -27,3 +29,15 @@ def login():
 @auth_bp.route('/logout', methods=['POST'])
 def logout():
     return 'logout'
+
+@auth_bp.route('/verify/<code>', methods=['POST'])
+def verify(code):
+    try:
+        user = get_user_by_verification(code)
+        user.verified = True
+        db.session.add(user)
+        db.session.commit()
+    except ResourceDoesNotExistError:
+        return error("invalid verification code")
+    
+    return jsonify(user.to_dict())
