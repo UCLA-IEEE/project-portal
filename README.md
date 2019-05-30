@@ -1,5 +1,12 @@
 # Project Portal
 
+### Client setup
+- Clone this repository (git clone \[url\])
+- Navigate into the newly created `project-portal` directory
+- Navigate into the "client" directory: `cd client`
+- Install required dependencies: `npm install`
+- Start the server: `npm run serve`
+
 ### Server setup
 
 - Clone this repository (git clone \[url\])

@@ -11,6 +11,18 @@ import Navigation from './components/Navigation'
 import MobileNavigation from './components/MobileNavigation'
 export default {
   name: 'app',
+  data() {
+    return {
+      authenticated: false
+    }
+  },
+  updated() {
+    this.$nextTick(function () {
+      if(!this.$store.state.authenticated) {
+        this.$router.replace({ name: "Login" });
+      }
+    })
+  },
   components: {
     'Navigation': Navigation,
     'MobileNavigation': MobileNavigation
