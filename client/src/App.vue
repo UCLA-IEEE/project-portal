@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navigation @authenticated="updateAuthenticated"></Navigation>
-    <router-view @authenticated="updateAuthenticated"/>
+    <Navigation></Navigation>
+    <router-view/>
   </div>
 </template>
 
@@ -14,12 +14,9 @@ export default {
       authenticated: false
     }
   },
-  methods: {
-    updateAuthenticated() {
-      this.authenticated = !this.authenticated;
-      if(!this.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
+  mounted() {
+    if(!this.$store.state.authenticated) {
+      this.$router.replace({ name: "Login" });
     }
   },
   components: {

@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import OPS from '@/components/OPS'
@@ -9,7 +8,6 @@ import Secure from '@/components/Secure'
 import Spec from '@/components/Spec'
 
 Vue.use(Router)
-Vue.use(Vuex)
 
 export default new Router({
   routes: [
@@ -48,15 +46,4 @@ export default new Router({
       component: Spec
     }
   ]
-})
-
-const store = new Vuex.Store({
-  state: {
-    authenticated: false
-  },
-  mutations: {
-    update (state) {
-      state.authenticated = !state.authenticated;
-    }
-  }
 })

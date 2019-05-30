@@ -6,10 +6,10 @@
         <router-link v-bind:key="routes.id"
         :to="`${routes.page}`">{{routes.text}}</router-link>
       </li>
-      <button v-if="!this.$parent.authenticated">
+      <button class='sign-button' v-if="!this.$store.state.authenticated" v-on:click="redirectLogin()">
         <router-link :to="`/Login`">Sign In</router-link>
       </button>
-      <button v-else v-on:click="handleLogout()">
+      <button class='sign-button' v-else v-on:click="handleLogout()">
         <router-link :to="`/Login`">Sign Out</router-link>
       </button>
     </ul>
@@ -41,8 +41,14 @@ export default {
     }
   },
   methods: {
+    redirectLogin() {
+      this.$router.replace({ name: "Login" });
+    },
     handleLogout() {
-      this.$emit("authenticated", true);
+      this.$store.commit('updateAuthenticated', false);
+      if(!this.$store.state.authenticated) {
+        this.$router.replace({ name: "Login" });
+      }
     }
   }
 }
@@ -68,7 +74,7 @@ export default {
     display: inline;
     margin: 0 30px;
   }
-  button {
+  .sign-button {
     background-color: #1F6891;
     color: white;
     padding: 8px 20px;
@@ -77,14 +83,14 @@ export default {
     margin-left: 30px;
     transition: background-color 0.2s ease;
   }
-  button:hover {
+  .sign-button:hover {
     background-color: #68A0BF;
   }
-  button a {
+  .sign-button a {
     color: white;
     transition: color 0.3s ease;
   }
-  button a:hover {
+  .sign-button a:hover {
     border-bottom: none;
   }
   a {

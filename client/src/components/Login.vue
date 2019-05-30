@@ -6,7 +6,7 @@
         <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu"/>
         <label for="password">Password</label>
         <input type="password" id='password' name="password" v-model="password" placeholder="Password" @keyup.enter="handleLogin()"/>
-        <p class='error-message' v-show="submitted && (!password || !username || !accepted)">Invalid username or password.</p>
+        <p class='error-message' v-show="isValid()">Invalid username or password.</p>
         <button type="button" v-on:click="handleLogin()">Login</button>
     </div>
 </template>
@@ -28,7 +28,7 @@
               this.submitted = true;
               const { username, password } = this;
 
-              // stop here if form is invalid
+              // Stop here if form is invalid
               if (!(username && password)) {
                 return;
               }
@@ -36,12 +36,15 @@
               userService.login(username, password)
               .then( value => {
                 this.accepted = true;
-                this.$emit("authenticated", true);
+                this.$store.commit('updateAuthenticated', true);
                 this.$router.replace({ name: "Secure" });
               })
               .catch( err => {
                 this.accepted = false;
               })
+            },
+            isValid() {
+              return this.submitted && (!this.password || !this.username || !this.accepted);
             }
         }
     }
