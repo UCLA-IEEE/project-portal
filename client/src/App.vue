@@ -1,16 +1,50 @@
 <template>
   <div id="app">
-    <Navigation></Navigation>
+    <MobileNavigation v-if="mobile"/>
+    <Navigation v-else></Navigation>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation'
+import MobileNavigation from './components/MobileNavigation'
 export default {
   name: 'app',
   components: {
-    'Navigation': Navigation
+    'Navigation': Navigation,
+    'MobileNavigation': MobileNavigation
+  },
+  data() {
+    return {
+      windowSize: {
+        width: 0,
+        height: 0
+      }
+    }
+  },
+  mounted: function() {
+    window.addEventListener("resize", this.handleResize)
+    this.handleResize()
+  },
+  beforeDestroy: function() {
+    window.removeEventListener("resize", this.handleResize)
+  },
+  methods: {
+    handleResize: function() {
+      var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      this.windowSize.width = w
+      this.windowSize.height = h
+    }
+  },
+  computed: {
+    mobile: function() {
+      if (this.windowSize.width < 950)
+        return true
+      else
+        return false
+    }
   }
 }
 </script>
