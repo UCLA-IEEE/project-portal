@@ -5,8 +5,8 @@
         <label for="username">Email</label>
         <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu"/>
         <label for="password">Password</label>
-        <input type="text" id='password' name="password" v-model="password" placeholder="Password"/>
-        <p class='error-message' v-show="submitted && (!password || !username)">Username or password cannot be empty.</p>
+        <input type="password" id='password' name="password" v-model="password" placeholder="Password" @keyup.enter="handleLogin()"/>
+        <p class='error-message' v-show="submitted && (!password || !username || !accepted)">Invalid username or password.</p>
         <button type="button" v-on:click="handleLogin()">Login</button>
     </div>
 </template>
@@ -19,7 +19,8 @@
             return {
                 username: '',
                 password: '',
-                submitted: false
+                submitted: false,
+                accepted: true
             }
         },
         methods: {
@@ -31,14 +32,15 @@
               if (!(username && password)) {
                 return;
               }
-              
+
               userService.login(username, password)
               .then( value => {
+                this.accepted = true;
                 this.$emit("authenticated", true);
                 this.$router.replace({ name: "Secure" });
               })
               .catch( err => {
-                console.log("Invalid user!");
+                this.accepted = false;
               })
             }
         }
@@ -80,7 +82,7 @@
     label {
       font-size: 14px;
     }
-    input[type=text], select {
+    input, select {
       width: 100%;
       padding: 5px 10px;
       margin: 8px 0;

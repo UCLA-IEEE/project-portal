@@ -14,14 +14,12 @@ export default {
       authenticated: false
     }
   },
-  mounted() {
-    if(!this.authenticated) {
-      this.$router.replace({ name: "Login" });
-    }
-  },
   methods: {
     updateAuthenticated() {
       this.authenticated = !this.authenticated;
+      if(!this.authenticated) {
+        this.$router.replace({ name: "Login" });
+      }
     }
   },
   components: {
