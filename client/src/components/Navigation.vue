@@ -36,6 +36,11 @@ export default {
           id: 3,
           text: 'Aircopter',
           page:'/Aircopter'
+        },
+        {
+          id: 4,
+          text: 'Secure',
+          page: '/secure'
         }
       ]
     }

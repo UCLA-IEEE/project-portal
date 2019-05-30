@@ -14,10 +14,12 @@ export default {
       authenticated: false
     }
   },
-  mounted() {
-    if(!this.$store.state.authenticated) {
-      this.$router.replace({ name: "Login" });
-    }
+  updated() {
+    this.$nextTick(function () {
+      if(!this.$store.state.authenticated) {
+        this.$router.replace({ name: "Login" });
+      }
+    })
   },
   components: {
     'Navigation': Navigation
