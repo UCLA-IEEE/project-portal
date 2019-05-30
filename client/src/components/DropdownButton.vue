@@ -1,6 +1,6 @@
 <template>
     <div class="dropdown">
-        <button href='#' ref="button" @click="$emit('open') " class="glyphicon glyphicon-chevron-down" id="arrow"
+        <button href='#' ref="button" @click="$emit('open'), toggleChevron" class="glyphicon glyphicon-chevron-down" id="arrow"
             type="button">
         </button>
     </div>

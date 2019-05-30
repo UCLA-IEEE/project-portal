@@ -68,107 +68,128 @@ export default {
             {
                 id: 1,
                 name: "Kathy Daniels",
-                progress: 50
+                progress: 5,
+                total: 10
             },
             {
                 id: 2,
                 name: "Robert Peralta",
-                progress: 80
+                progress: 8,
+                total: 10
             },
             {
                 id: 3,
                 name: "Michelle Lam",
-                progress: 60
+                progress: 6,
+                total: 10
             },
             {
                 id: 4,
                 name: "Jiwan Kang",
-                progress: 40
+                progress: 4,
+                total: 10
             },
             {
                 id: 5,
                 name: "Michelle Tan",
-                progress: 90
+                progress: 9,
+                total: 10
             },
             {
                 id: 6,
                 name: "Serene Kamal",
-                progress: 40
+                progress: 4,
+                total: 10
             },
             {
                 id: 7,
                 name: "Eugene Lo",
-                progress: 60
+                progress: 6,
+                total: 10
             },
             {
                 id: 8,
                 name: "John Doe",
-                progress: 100
+                progress: 10,
+                total: 10
             },
             {
                 id: 9,
                 name: "Josephine Bruin",
-                progress: 30
+                progress: 3,
+                total: 10
             },
             {
                 id: 10,
                 name: "Jeffrey Chan",
-                progress: 50
+                progress: 5,
+                total: 10
             },
             {
                 id: 11,
                 name: "Robert Downey, Jr.",
-                progress: 10
+                progress: 1,
+                total: 10
             },
             {
                 id: 12,
                 name: "Anonymous",
-                progress: 0
+                progress: 0,
+                total: 10
             },
             {
                 id: 13,
                 name: "Josephine Bruin",
-                progress: 90
+                progress: 9,
+                total: 10
             },
             {
                 id: 14,
                 name: "Maggie Huang",
-                progress: 40
+                progress: 4,
+                total: 10
             },
             {
                 id: 15,
                 name: "Robert Peralta",
-                progress: 50
+                progress: 5,
+                total: 10
             },
             {
                 id: 16,
                 name: "Robert Zalog",
-                progress: 80
+                progress: 8,
+                total: 10
             },
             {
                 id: 17,
                 name: "Kathy Daniels",
-                progress: 100
+                progress: 10,
+                total: 10
             },
             {
                 id: 18,
                 name: "Roselyn Lee",
-                progress: 80
+                progress: 8,
+                total: 10
             },
             {
                 id: 19,
                 name: "Maggie Huang",
-                progress: 20
+                progress: 2,
+                total: 10
             },
             {
                 id: 20,
                 name: "Roselyn Lee",
-                progress: 30
+                progress: 3,
+                total: 10
             },
             {
                 id: 21,
                 name: "Jeffrey Chan",
-                progress: 10
+                progress: 1,
+                total: 10
             }
         ]
       }
@@ -181,7 +202,7 @@ export default {
     display: grid;
     grid-template-columns: 70% 30%;
     grid-column-gap: 50px;
-    margin: 25px 100px;
+    margin-top: 25px;
     }
 
     .checkoffs {
@@ -189,7 +210,7 @@ export default {
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);   
         grid-column-start: 1;
         grid-column-end: 2;
-}
+        }
 
     .roster {
         text-align: left;
@@ -230,7 +251,8 @@ export default {
         width: 90%;
     }
 
-
- 
-
+    hr {
+    border-color: #1F6891;
+    background-color: #1F6891;
+    }
 </style>

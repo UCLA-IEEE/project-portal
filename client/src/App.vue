@@ -9,6 +9,16 @@
 import Navigation from './components/Navigation'
 export default {
   name: 'app',
+  data() {
+    return {
+      authenticated: false
+    }
+  },
+  mounted() {
+    if(!this.$store.state.authenticated) {
+      this.$router.replace({ name: "Login" });
+    }
+  },
   components: {
     'Navigation': Navigation
   }

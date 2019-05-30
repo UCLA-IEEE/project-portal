@@ -3,8 +3,11 @@
         <div id="member-name">    
             <p>{{ member.name }}</p>
         </div>
-        <div id="member-progress">
-            <p>{{ member.progress }}%</p>
+        <div id="member-progress-block">
+            <div class="member-total-progress">
+                <div class="member-current-progress"
+                :style="{ width: calculatePercentage() + '%'} "></div>
+            </div> 
         </div>
     </div>
 </template>
@@ -14,6 +17,11 @@ export default {
     name: 'RosterTile',
     props: {
         member: Object
+    },
+    methods: {
+        calculatePercentage() {
+            return (this.member.progress / this.member.total) * 100;
+        }
     }
 }
 </script>
@@ -21,11 +29,35 @@ export default {
 <style>
 .member-progress {
     height: 30px;
+    display: grid;
+    grid-template-columns: 50% auto;
+    width: 80%;
 }
 
 #member-name {
     font-weight: bold;
-    width: 60%;
-    display: inline-block;
+    grid-column-start: 1;
+    grid-column-end: 2;
 }
+
+#member-progress-block {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}
+
+.member-total-progress {
+    background-color: #EFEFEF;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    height: 20%;
+}
+
+.member-current-progress {
+    background-color: #1F6891;
+    height: 100%;
+    border-radius: 5px;
+}
+
+
 </style>

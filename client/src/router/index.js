@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+import Login from '@/components/Login'
 import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
 import Aircopter from '@/components/Aircopter'
 import Checkoffs from '@/components/Checkoffs'
+import Secure from '@/components/Secure'
+import Spec from '@/components/Spec'
 
 Vue.use(Router)
 
@@ -12,8 +14,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
+      redirect: '/Login'
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     },
     {
       path: '/ops',
@@ -34,6 +40,16 @@ export default new Router({
       path: '/checkoffs',
       name: 'Checkoffs',
       component: Checkoffs
+    },
+    {
+      path: '/secure',
+      name: 'Secure',
+      component: Secure
+    },
+    {
+      path: '/spec',
+      name: 'Spec',
+      component: Spec
     }
   ]
 })

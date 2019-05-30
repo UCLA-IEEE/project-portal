@@ -49,8 +49,6 @@ export default {
         }
     }
 }
-
-
 </script>
 
 <style>
@@ -63,11 +61,9 @@ export default {
     text-align: left;
     border-top: 1px solid #1F6891;
 }
-
 .show {
     display: block;
 }
-
 .dropdown-backdrop {
     background-color: #EFEFEF;
     border-top: 5px solid;
@@ -79,13 +75,11 @@ export default {
     grid-row-start: 2;
     grid-row-end: 3;
 }
-
 #checkoff-title {  
     font-size: 24px;
     line-height: 32px;
     text-align: center;
 }
-
 #title-block {
     margin-top: 10px;
     font-weight: bold;
@@ -96,7 +90,6 @@ export default {
     grid-row-end: 2;
     position: relative;
 }
-
 #progress-block {
     margin-top: 10px;
     margin-right: 5px;
@@ -108,7 +101,6 @@ export default {
     display: grid;
     grid-template-columns: 15% 85%;
 }
-
 #total-progress {
     background-color: #EFEFEF;
     grid-column-start: 2;
@@ -116,29 +108,23 @@ export default {
     margin-bottom: 15px;
     margin-top: 5px;
     border-radius: 5px;
-
 }
-
 #current-progress {
     background-color: #1F6891;
     height: 100%;
     border-radius: 5px;
 }
-
 #percent {
     grid-column-start: 1;
     grid-column-end: 2;
 }
-
 button:focus {
     outline: 0;
 }
-
 button:active{
     background-color: #eee;
     color: #eee;
 }
-
 .expand-enter-active, .expand-leave-active {
     transition: all .3s ease-in-out;
     height: 30px;
@@ -146,12 +132,9 @@ button:active{
     background-color: #eee;
     overflow: hidden;
 }
-
 .expand-enter, .expand-leave {
     height: 0;
     padding: 0 10px;
     opacity: 0;
 }
-
 </style>
-
