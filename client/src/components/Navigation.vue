@@ -1,6 +1,6 @@
 <template>
   <div class='navbar'>
-    <a href="/"><img class='logo' src='../../public/ieee-logo.png'></a>
+    <a href="`/Login`"><img class='logo' src='../../public/ieee-logo.png'></a>
     <ul class='project-list'>
       <li class='project' v-for="routes in links" v-bind:key="routes.id">
         <router-link v-bind:key="routes.id"
