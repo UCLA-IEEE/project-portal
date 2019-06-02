@@ -30,8 +30,7 @@ export default {
 .member-progress {
     height: 30px;
     display: grid;
-    grid-template-columns: 50% auto;
-    width: 80%;
+    grid-template-columns: 2fr 1fr;
 }
 
 #member-name {
@@ -59,5 +58,24 @@ export default {
     border-radius: 5px;
 }
 
-
+@media (max-width: 1000px) {
+    .member-progress {
+        height: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+    #member-name {
+        grid-row: 1/2;
+        grid-column: 1/2;
+    }
+    #member-progress-block {
+        grid-row: 2/auto;
+        grid-column: 1/2;
+        width: 50%;
+    }
+    .member-total-progress {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+}
 </style>

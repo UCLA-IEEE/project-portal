@@ -10,7 +10,7 @@
                 :style="{ width: calculatePercentage() + '%'} "></div>
             </div> 
         </div>
-        <DropdownButton v-on:open='setOpen'></DropdownButton>
+        <DropdownButton v-on:open='setOpen' id="dropdown-arrow"></DropdownButton>
         <transition name='expand'>
             <div v-if="open" class="dropdown-backdrop">
             </div>
@@ -54,7 +54,7 @@ export default {
 <style>
 .project-progress {
     display: grid;
-    grid-template-columns: 60% 35% 5%;
+    grid-template-columns: 60% 35% auto;
     grid-template-rows: auto auto;
     position: relative;
     margin: auto 40px;
@@ -108,6 +108,7 @@ export default {
     margin-bottom: 15px;
     margin-top: 5px;
     border-radius: 5px;
+    height: 10px;
 }
 #current-progress {
     background-color: #1F6891;
@@ -136,5 +137,34 @@ button:active{
     height: 0;
     padding: 0 10px;
     opacity: 0;
+}
+
+@media (max-width: 1000px)
+{
+    .project-progress {
+        grid-template-columns: 95% 5%;
+        grid-template-rows: 1fr 1fr auto;
+    }
+    #title-block {
+        margin-left: 25px;
+        grid-column: 1/2;
+        grid-row: 1/2;
+    }
+
+    #dropdown-arrow {
+        grid-column: 2/3;
+        grid-row: 1/2
+    }
+
+    #progress-block {
+        margin-left: 25px;
+        grid-column: 1/3;
+        grid-row: 2/3;
+    }
+    .dropdown-backdrop {
+        grid-row: 3/4;
+    }
+
+    
 }
 </style>

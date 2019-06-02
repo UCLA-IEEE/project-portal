@@ -5,11 +5,11 @@
             <CheckoffTile v-for="project in projects" :project='project' :key="project.id"></CheckoffTile>
         </div>
         <div class="roster">
-            <div id="roster-contents">
+            <div >
                 <h1 class="title" id="roster-title">Roster</h1>
                 <hr>
                 <input type="text" placeholder="Search members">
-                <RosterTile v-for="member in members" :member='member' :key='member.id'></RosterTile>
+                <RosterTile v-for="member in members" :member='member' id="roster-contents" :key='member.id'></RosterTile>
             </div>
         </div>
     </div>
@@ -200,23 +200,25 @@ export default {
 <style>
     .container {
     display: grid;
-    grid-template-columns: 70% 30%;
-    grid-column-gap: 50px;
+    grid-template-columns: 5fr 2fr;
+    grid-column-gap: 25px;
     margin-top: 25px;
     }
 
     .checkoffs {
         background: #FFFFFF;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);   
-        grid-column-start: 1;
-        grid-column-end: 2;
-        }
+        grid-column: 1 / 2;
+        margin-left: 25px;
+    }
 
     .roster {
         text-align: left;
-        grid-column-start: 2;
-        grid-column-end: 3;
-        border-left: 1px solid rgb(124, 158, 179);
+        grid-column: 2 / 3;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        background: #FFFFFF;
+        padding: 30px;
+        margin-right: 25px;
     }
 
     .title {
@@ -234,7 +236,6 @@ export default {
     }
     
     #roster-contents {
-        margin-left: 40px;
         line-height: 40px;
     }
 
@@ -249,10 +250,38 @@ export default {
         border-radius: 5px;
         padding-left: 10px;
         width: 90%;
+        margin-bottom: 10px;
     }
 
     hr {
     border-color: #1F6891;
     background-color: #1F6891;
     }
+
+    @media (max-width: 768px) {
+        .container {
+            display: grid;
+            grid-column-gap: 0px;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            grid-row-gap: 25px;
+        }
+
+        .checkoffs {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+            margin-left: 0px;
+        }
+
+        .roster {
+            grid-column: 1 / 2;
+            grid-row: 2 / auto;
+            margin-right: 0px;
+        }
+
+        #roster-contents {
+            line-height: 30px;
+        }
+
+    } 
 </style>

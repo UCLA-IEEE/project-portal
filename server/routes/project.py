@@ -38,7 +38,7 @@ def get_project(name):
         except ResourceDoesNotExistError:
             return error(f"Project '{name}' not found.", 404)
 
-@project_bp.route("/project/", methods=['POST'])
+@project_bp.route("/assignment/", methods=['POST'])
 def add_assignment():
     data = request.get_json()
 
@@ -47,6 +47,6 @@ def add_assignment():
     except KeyError:
         return error('bad request')
     except ResourceExistsError:
-        return error('Assignment/Project does not exist')
+        return error('Assignment/Project already exists')
 
     return jsonify(added_assignment)
