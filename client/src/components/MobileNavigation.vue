@@ -8,7 +8,7 @@
         <rect class="rectangle" y="16"/>
       </svg>
     </div>
-    <div class="mobile-dropdown" v-show="displayMenu">
+    <div :class="[dropdownBase, displayMenu ? dropdownDisplay : '']" :style="{ width: dropWidth }">
       <router-link class="mobile-links" v-for="routes in links"
       :key="routes.id" :to="`${routes.page}`">{{routes.text}}</router-link>
       <button class='mobile-sign-button' v-if="!this.$store.state.authenticated" v-on:click="redirectLogin()">
@@ -24,6 +24,9 @@
 <script>
 export default {
   name: "MobileNavigation",
+  props: {
+    width: Number
+  },
   data() {
     return {
       links: [
@@ -48,7 +51,9 @@ export default {
           page: '/secure'
         }
       ],
-      displayMenu: false
+      displayMenu: false,
+      dropdownBase: "mobile-dropdown",
+      dropdownDisplay: "mobile-dropdown-display"
     }
   },
   methods: {
@@ -73,6 +78,10 @@ export default {
       if (this.displayMenu)
         return "rgba(31, 104, 145, 0.4)"
       return "#1F6891"
+    },
+    dropWidth: function() {
+      var offset = 16 + .1*this.width
+      return ((this.width - offset).toString() + "px")
     }
   }
 }
@@ -103,14 +112,20 @@ export default {
   }
 
   .mobile-dropdown {
+    position: absolute;
+    top: 13px;
     display: flex;
     height: 40px;
-    width: inherit;
-    padding: 10px 40px;
+    padding: 10px 5%;
     align-items: center;
     justify-content: space-between;
+    z-index: -1;
 
     background: rgba(31, 104, 145, 0.85);
+    transition: top .3s, box-shadow .3s;
+  }
+  .mobile-dropdown-display {
+    top: 73px;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   }
   .mobile-dropdown a, .mobile-sign-button a {
@@ -128,5 +143,9 @@ export default {
     border: 1px solid white;
     border-radius: 5px;
     margin-left: 30px;
+    transition: background-color 0.2s ease;
+  }
+  .mobile-sign-button:hover {
+    background-color: #68A0BF;
   }
 </style>

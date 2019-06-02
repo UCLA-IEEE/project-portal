@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MobileNavigation v-if="mobile"/>
+    <MobileNavigation v-if="mobile" :width="windowSize.width"/>
     <Navigation v-else></Navigation>
     <router-view/>
   </div>
@@ -13,7 +13,11 @@ export default {
   name: 'app',
   data() {
     return {
-      authenticated: false
+      authenticated: false,
+      windowSize: {
+        width: 0,
+        height: 0
+      }
     }
   },
   updated() {
@@ -26,14 +30,6 @@ export default {
   components: {
     'Navigation': Navigation,
     'MobileNavigation': MobileNavigation
-  },
-  data() {
-    return {
-      windowSize: {
-        width: 0,
-        height: 0
-      }
-    }
   },
   mounted: function() {
     window.addEventListener("resize", this.handleResize)
