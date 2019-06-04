@@ -10,13 +10,11 @@
     </div>
     <div :class="[dropdownBase, displayMenu ? dropdownDisplay : '']" :style="{ width: dropWidth }">
       <router-link class="mobile-links" v-for="routes in links"
-      :key="routes.id" :to="`${routes.page}`">{{routes.text}}</router-link>
-      <button class='mobile-sign-button' v-if="!this.$store.state.authenticated" v-on:click="redirectLogin()">
-        <router-link :to="`/Login`">Sign In</router-link>
-      </button>
-      <button class='mobile-sign-button' v-else v-on:click="handleLogout()">
-        <router-link :to="`/Login`">Sign Out</router-link>
-      </button>
+        :key="routes.id" :to="`${routes.page}`">{{routes.text}}</router-link>
+      <router-link class="mobile-links" :to="`/Login`" v-if="!this.$store.state.authenticated"
+        @click="redirectLogin()">Sign In</router-link>
+      <router-link class="mobile-links" :to="`/Login`" v-else
+        @click="handleLogout()">Sign Out</router-link>
     </div>
   </div>
 </template>
@@ -46,7 +44,7 @@ export default {
           page:'/Aircopter'
         },
         {
-          id: 4,
+          id: 3,
           text: 'Secure',
           page: '/secure'
         }
@@ -89,11 +87,13 @@ export default {
 
 <style>
   .mobile-navbar-main {
+    position: relative;
     display: flex;
     height: 45px;
     padding: 10px 20px;
     align-items: center;
     justify-content: space-between;
+    z-index: 1;
 
     background-color: white;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
@@ -118,8 +118,8 @@ export default {
     height: 40px;
     padding: 10px 5%;
     align-items: center;
-    justify-content: space-between;
-    z-index: -1;
+    justify-content: space-around;
+    z-index: 0;
 
     background: rgba(31, 104, 145, 0.85);
     transition: top .3s, box-shadow .3s;

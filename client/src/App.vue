@@ -40,15 +40,15 @@ export default {
   },
   methods: {
     handleResize: function() {
-      var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-      var h = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      var w = document.documentElement.clientWidth || document.body.clientWidth
+      var h = document.documentElement.clientHeight || document.body.clientHeight
       this.windowSize.width = w
       this.windowSize.height = h
     }
   },
   computed: {
     mobile: function() {
-      if (this.windowSize.width < 950)
+      if (this.windowSize.width < 1090)
         return true
       else
         return false
