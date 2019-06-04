@@ -134,18 +134,4 @@ export default {
   .mobile-dropdown a:hover {
     border-bottom: 1px solid white;
   }
-  .mobile-sign-button a:hover {
-    border-bottom: none;
-  }
-  .mobile-sign-button {
-    background-color: inherit;
-    padding: 8px 20px;
-    border: 1px solid white;
-    border-radius: 5px;
-    margin-left: 30px;
-    transition: background-color 0.2s ease;
-  }
-  .mobile-sign-button:hover {
-    background-color: #68A0BF;
-  }
 </style>
