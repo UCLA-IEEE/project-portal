@@ -14,7 +14,7 @@
       <router-link class="mobile-links" :to="`/Login`" v-if="!this.$store.state.authenticated"
         @click="redirectLogin()">Sign In</router-link>
       <router-link class="mobile-links" :to="`/Login`" v-else
-        @click="handleLogout()">Sign Out</router-link>
+        @click.native="handleLogout()">Sign Out</router-link>
     </div>
   </div>
 </template>
@@ -96,12 +96,12 @@ export default {
     z-index: 1;
 
     background-color: white;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
+    border-bottom: .3px solid black;
   }
   .mobile-icon {
     height: 18px;
     width: 24px;
-    transition: fill .5s;
+    transition: fill .3s;
   }
   .rectangle {
     height: 2px;
@@ -122,11 +122,10 @@ export default {
     z-index: 0;
 
     background: rgba(31, 104, 145, 0.85);
-    transition: top .3s, box-shadow .3s;
+    transition: top .3s;
   }
   .mobile-dropdown-display {
     top: 73px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
   }
   .mobile-dropdown a, .mobile-sign-button a {
     color: white;

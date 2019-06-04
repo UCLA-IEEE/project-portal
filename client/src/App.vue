@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     mobile: function() {
-      if (this.windowSize.width < 1090)
+      if (this.windowSize.width < 1105)
         return true
       else
         return false
