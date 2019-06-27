@@ -1,13 +1,13 @@
 <template>
-  <a class="calendar-event" :href="calEvent.link">
+  <div class="calendar-event">
     <div class="date-background">
-      <p class="event-date">{{calEvent.date}}</p>
+      <p class="event-date">{{calEvent.date.formatted}}</p>
     </div>
     <div class="event-info">
       <p class="event-title">{{calEvent.title}}</p>
       <p class="event-location">{{calEvent.location}}</p>
     </div>
-  </a>
+  </div>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
 }
 .event-date {
   position: relative;
-  bottom: 6px;
+  bottom: 10px;
   left: 7.5px;
 
   height: 40px;
@@ -54,9 +54,10 @@ export default {
 }
 .event-info {
   grid-area: info;
-  margin: 10px 0px;
+  margin: 10px 0px 10px 30px;
 
   font-size: 13px;
+  text-align: left;
 }
 .event-title {
   margin: 0px;

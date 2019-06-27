@@ -33,16 +33,21 @@ export default {
           var j
           for (j in raw) { // Extract necessary fields
             var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
-            temp.id = globalId++
+
             temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)
+            if (temp.date.absolute < new Date().getTime()) { continue; }  // If the event has already passed, skip it
+
+            temp.id = globalId++
             temp.title = raw[j].gsx$name.$t
             temp.location = raw[j].gsx$location.$t
             refined.push(temp)
           }
           nPagesLoaded++
 
-          if (nPagesLoaded == self.N_PAGES) {  // After loading last page, store event data
+          if (nPagesLoaded == self.N_PAGES) {  // After loading last page, store and sort event data
             self.calEvents = refined
+
+            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute})
           }
         }
 
@@ -51,13 +56,36 @@ export default {
       }
     },
     parseDate: function (raw) {
-      return raw
+      var temp = { 'absolute': null, 'formatted': null} // absolute: date in milliseconds, formatted: display formatting
+      var date = new Date(raw)
+      temp.absolute = date.getTime()
+
+      var day = date.getDate().toString()
+
+      var month
+      switch (date.getMonth()) {
+        case 0:   month = 'jan';    break;
+        case 1:   month = 'feb';    break;
+        case 2:   month = 'mar';    break;
+        case 3:   month = 'apr';    break;
+        case 4:   month = 'may';    break;
+        case 5:   month = 'jun';    break;
+        case 6:   month = 'jul';    break;
+        case 7:   month = 'aug';    break;
+        case 8:   month = 'sep';    break;
+        case 9:   month = 'oct';    break;
+        case 10:  month = 'nov';    break;
+        case 11:  month = 'dec';    break;
+      }
+
+      temp.formatted = month + ' ' + day
+      return temp
     }
   },
   data() {
     return {
       calEvents: [],
-      N_PAGES: 6
+      N_PAGES: 2
     }
   }
 }
