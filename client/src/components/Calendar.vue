@@ -48,10 +48,11 @@ export default {
           }
           nPagesLoaded++
 
-          if (nPagesLoaded == self.N_PAGES) {  // After loading last page, store and sort event data
-            self.calEvents = refined
+          if (nPagesLoaded == self.N_PAGES) {  // After loading last page
+            self.calEvents = refined     // Store data in global variable
 
-            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute})
+            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute })   // Sort events by date
+            self.calEvents = self.calEvents.slice(0, 4) // Only display first 4 events
           }
         }
 
@@ -88,10 +89,11 @@ export default {
           }
           nPagesLoaded++
 
-          if (nPagesLoaded == self.N_PAGES) {  // After loading last page, store and sort event data
-            self.calEvents = refined
+          if (nPagesLoaded == self.N_PAGES) {  // After loading last page
+            self.calEvents = refined     // Store data in global variable
 
-            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute})
+            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute })   // Sort events by date
+            self.calEvents = self.calEvents.slice(0, 4) // Only display first 4 events
           }
         }
 
@@ -100,7 +102,7 @@ export default {
       }
     },
     parseDate: function (raw) {
-      var temp = { 'absolute': null, 'formatted': null} // absolute: date in milliseconds, formatted: display formatting
+      var temp = { 'absolute': null, 'formatted': null } // absolute: date in milliseconds, formatted: display formatting
 
       if (isNaN(raw[0])) {  // If the first char isn't a number, the string requires trimming
         var i
