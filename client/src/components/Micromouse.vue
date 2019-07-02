@@ -2,7 +2,8 @@
   <div class="mm-page">
     <h1 class="mm-title">Micromouse</h1>
     <SpecListing class="mm-list" project="Micromouse"/>
-    <Sidebar class="mm-sidebar" v-if="sidebar" facebook="https://www.facebook.com/groups/456491081426382/"/> <!-- REPLACE LINK FOR NEW YEAR -->
+    <Sidebar class="mm-sidebar" v-if="sidebar"
+     facebook="https://www.facebook.com/groups/456491081426382/" project="MM"/> <!-- REPLACE LINK FOR NEW YEAR -->
   </div>
 </template>
 

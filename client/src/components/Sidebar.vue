@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <p class="section-title">Upcoming Dates</p>
-    <Calendar/>
+    <Calendar :project="this.project"/>
     <p class="section-title">All Projects</p>
       <router-link v-for="project in projects" :key="project.id" :to="project.link">
         <p class="sidebar-project">{{project.title}}</p>
@@ -29,7 +29,8 @@ export default {
     Calendar
   },
   props: {
-    facebook: String
+    facebook: String,
+    project: String
   },
   data() {
     return {

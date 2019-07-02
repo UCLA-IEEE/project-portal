@@ -2,7 +2,8 @@
   <div class="ap-page">
     <h1 class="ap-title">Aircopter</h1>
     <SpecListing class="ap-list" project="Aircopter"/>
-    <Sidebar class="ap-sidebar" v-if="sidebar" facebook="https://www.facebook.com/groups/456491081426382/"/> <!-- REPLACE LINK FOR NEW YEAR -->
+    <Sidebar class="ap-sidebar" v-if="sidebar"
+     facebook="https://www.facebook.com/groups/456491081426382/" project="AP"/> <!-- REPLACE LINK FOR NEW YEAR -->
   </div>
 </template>
 

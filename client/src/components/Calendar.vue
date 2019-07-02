@@ -11,6 +11,9 @@ export default {
   components: {
     CalendarEvent
   },
+  props: {
+    project: String
+  },
   created: function () {
     this.importEvents()
   },
@@ -22,70 +25,53 @@ export default {
       var refined = []
       var nPagesLoaded = 0
 
-      // Loading data from first 2 pages of spreadsheet
-
       var i
-      for (i = 1; i <= 2; i++) {
+      for (i = 1; i <= this.N_PAGES; i++) {
         var xhr = new XMLHttpRequest()
 
         xhr.onload = function () {
           var raw = JSON.parse(this.responseText)
-          raw = raw.feed.entry
-          if (raw.length > 1) {  // Only process the page if there are events on it
-            delete raw[0]    // Remove formatting row
-            var j
-            for (j in raw) { // Extract necessary fields
-              var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
 
-              temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)
-              if (temp.date.absolute < new Date().getTime()) { continue; }  // If the event has already passed, skip it
-
-              temp.id = globalId++
-              temp.title = raw[j].gsx$name.$t
-              temp.location = raw[j].gsx$location.$t
-              refined.push(temp)
-            }
+          var pageNum
+          switch (raw.feed.title.$t) {    // Get page number in async xmlhttprequests
+            case 'Fall':                        pageNum = 1;  break;
+            case 'Fall Project Deadlines':      pageNum = 2;  break;
+            case 'Winter':                      pageNum = 3;  break;
+            case 'Winter Project Deadlines':    pageNum = 4;  break;
+            case 'Spring':                      pageNum = 5;  break;
+            case 'Spring Project Deadlines':    pageNum = 6;  break;
           }
-          nPagesLoaded++
 
-          if (nPagesLoaded == self.N_PAGES) {  // After loading last page
-            self.calEvents = refined     // Store data in global variable
-
-            self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute })   // Sort events by date
-            self.calEvents = self.calEvents.slice(0, 4) // Only display first 4 events
-          }
-        }
-
-        xhr.open('GET', 'https://spreadsheets.google.com/feeds/list/19eixWfc2iZl5JbjN2JqfQxr1KIkt-bDJm7NZrAg6NBM/' + i + '/public/values?alt=json')
-        xhr.send()
-      }
-
-      // Loading data from last 4 pages of spreadsheet
-
-      for (i = 3; i <= self.N_PAGES; i++) {
-        var xhr = new XMLHttpRequest()
-
-        xhr.onload = function () {
-          var raw = JSON.parse(this.responseText)
           raw = raw.feed.entry
-          if (raw.length > 2) {  // Only process the page if there are events on it
-            delete raw[0]    // Remove formatting rows
+          if (pageNum > 2)      // Remove extra formatting row for pages 3 - 6
             delete raw[1]
-            var j
-            for (j in raw) { // Extract necessary fields
-              var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
+          delete raw[0]         // Remove formatting row
 
-              temp.date = self.parseDate(raw[j].gsx$datemdyy.$t)
-              if (temp.date.absolute < new Date().getTime() || 
-                  raw[j].gsx$leaveoffcalendaryesno.$t == 'Yes' || 
-                  raw[j].gsx$leaveoffcalendaryesno.$t == 'yes') 
-                  { continue; }  // If the event has already passed or doesn't belong on the calendar, skip it
+          var j
+          for (j in raw) {      // Extract necessary fields
+            var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
 
-              temp.id = globalId++
-              temp.title = raw[j].gsx$name.$t
-              temp.location = raw[j].gsx$location.$t
-              refined.push(temp)
+            if (pageNum > 2) {
+              temp.date = self.parseDate(raw[j].gsx$datemdyy.$t)    // Handle different formatting for pages 3 - 6
+            } else {
+              temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)
             }
+            
+            /*
+             * Skip an event if:
+             *   * It has already passed
+             *   * It doesn't belong on the calendar (pages 3 - 6)
+             *   * It isn't relevant to the current project page
+             */
+
+            if ((temp.date.absolute < new Date().getTime()) || 
+                (pageNum > 2 && raw[j].gsx$leaveoffcalendaryesno.$t.toLowerCase() == 'yes') || 
+                (pageNum % 2 == 0 && raw[j].gsx$project.$t != '' && raw[j].gsx$project.$t != self.project)) { continue; } 
+
+            temp.id = globalId++
+            temp.title = raw[j].gsx$name.$t
+            temp.location = raw[j].gsx$location.$t
+            refined.push(temp)
           }
           nPagesLoaded++
 
@@ -101,6 +87,7 @@ export default {
         xhr.send()
       }
     },
+
     parseDate: function (raw) {
       var temp = { 'absolute': null, 'formatted': null } // absolute: date in milliseconds, formatted: display formatting
 

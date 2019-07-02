@@ -2,7 +2,8 @@
   <div class="ops-page">
     <h1 class="ops-title">Open Project Space</h1>
     <SpecListing class="ops-list" project="OPS"/>
-    <Sidebar class="ops-sidebar" v-if="sidebar" facebook="https://www.facebook.com/groups/456491081426382/"/> <!-- REPLACE LINK FOR NEW YEAR -->
+    <Sidebar class="ops-sidebar" v-if="sidebar"
+     facebook="https://www.facebook.com/groups/456491081426382/" project="OPS"/> <!-- REPLACE LINK FOR NEW YEAR -->
   </div>
 </template>
 
