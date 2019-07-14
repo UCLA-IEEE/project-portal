@@ -1,17 +1,18 @@
 <template>
-  <div class="container">
+  <div class="checkoffs-container">
         <div class="checkoffs">
-            <h1 class="title" id="checkoff-title">Checkoffs</h1>
+            <h1 class="checkoff-title" id="checkoff-title">Checkoffs</h1>
             <CheckoffTile v-for="project in projects" :project='project' :key="project.id"></CheckoffTile>
         </div>
         <div class="roster">
             <div >
-                <h1 class="title" id="roster-title">Roster</h1>
+                <h1 class="checkoff-title" id="roster-title">Roster</h1>
                 <hr>
                 <input type="text" placeholder="Search members">
-                <RosterTile v-for="member in members" :member='member' id="roster-contents" :key='member.id'></RosterTile>
+                <RosterTile v-for="member in members" :member='member' :projects='projects' id="roster-contents" :key='member.id'></RosterTile>
             </div>
         </div>
+        
     </div>
 </template>
 
@@ -68,141 +69,309 @@ export default {
             {
                 id: 1,
                 name: "Kathy Daniels",
-                progress: 5,
-                total: 10
+                projects: ['Open Project Space'],
+                progress:   5,
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 2,
                 name: "Robert Peralta",
+                projects: ['Open Project Space'],
                 progress: 8,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 3,
                 name: "Michelle Lam",
+                projects: ['Open Project Space'],
                 progress: 6,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 4,
                 name: "Jiwan Kang",
+                projects: ['Open Project Space'],
                 progress: 4,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 5,
                 name: "Michelle Tan",
+                projects: ['Open Project Space'],
                 progress: 9,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 6,
                 name: "Serene Kamal",
+                projects: ['Open Project Space'],
                 progress: 4,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 7,
                 name: "Eugene Lo",
+                projects: ['Open Project Space'],
                 progress: 6,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 8,
                 name: "John Doe",
+                projects: ['Open Project Space'],
                 progress: 10,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 9,
                 name: "Josephine Bruin",
+                projects: ['Open Project Space'],
                 progress: 3,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 10,
                 name: "Jeffrey Chan",
+                projects: ['Open Project Space'],
                 progress: 5,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 11,
                 name: "Robert Downey, Jr.",
+                projects: ['Open Project Space'],
                 progress: 1,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 12,
                 name: "Anonymous",
+                projects: ['Open Project Space'],
                 progress: 0,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 13,
                 name: "Josephine Bruin",
+                projects: ['Open Project Space'],
                 progress: 9,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 14,
                 name: "Maggie Huang",
+                projects: ['Open Project Space'],
                 progress: 4,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 15,
                 name: "Robert Peralta",
+                projects: ['Open Project Space'],
                 progress: 5,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 16,
                 name: "Robert Zalog",
+                projects: ['Open Project Space'],
                 progress: 8,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 17,
                 name: "Kathy Daniels",
+                projects: ['Open Project Space'],
                 progress: 10,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 18,
                 name: "Roselyn Lee",
+                projects: ['Open Project Space'],
                 progress: 8,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 19,
                 name: "Maggie Huang",
+                projects: ['Open Project Space'],
                 progress: 2,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 20,
                 name: "Roselyn Lee",
+                projects: ['Open Project Space'],
                 progress: 3,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             },
             {
                 id: 21,
                 name: "Jeffrey Chan",
+                projects: ['Open Project Space'],
                 progress: 1,
-                total: 10
+                total: 10,
+                email: "danielskathy@gmail.com",
+                year: "Junior",
+                deposit: true,
+                box: true,
+                labSafety: true,
+                shopSafety: true,
+                checkpoints: [true, true, true, false, false]
             }
-        ]
+          ]
       }
   }
 }
 </script>
 
 <style>
-    .container {
-    display: grid;
-    grid-template-columns: 5fr 2fr;
-    grid-column-gap: 25px;
-    margin-top: 25px;
+    .checkoffs-container {
+        display: grid;
+        grid-template-columns: 5fr 2fr;
+        grid-column-gap: 25px;
+        margin: 25px 125px;
     }
 
     .checkoffs {
@@ -221,14 +390,13 @@ export default {
         margin-right: 25px;
     }
 
-    .title {
+    .checkoff-title {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         color: #1F6891;
         font-weight: 450;
         text-transform: uppercase;
         margin-top: 25px;
     }
-
 
     #roster-title {
         font-size: 18px;
@@ -259,7 +427,7 @@ export default {
     }
 
     @media (max-width: 768px) {
-        .container {
+        .checkoffs-container {
             display: grid;
             grid-column-gap: 0px;
             grid-template-columns: 1fr;

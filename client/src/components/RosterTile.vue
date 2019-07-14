@@ -1,26 +1,45 @@
 <template>
-    <div class="member-progress">
-        <div id="member-name">    
-            <p>{{ member.name }}</p>
+    <div class="roster-container">
+        <div class="member-progress" @click="setPopup" ref="popup">
+            <div id="member-name">    
+                <p>{{ member.name }}</p>
+            </div>
+            <div id="member-progress-block">
+                <div class="member-total-progress">
+                    <div class="member-current-progress"
+                    :style="{ width: calculatePercentage() + '%'} "></div>
+                </div> 
+            </div>
         </div>
-        <div id="member-progress-block">
-            <div class="member-total-progress">
-                <div class="member-current-progress"
-                :style="{ width: calculatePercentage() + '%'} "></div>
-            </div> 
+        <div v-if="popup" class="member-popup">
+            <MemberPopup v-on:popup="setPopup" :member='member' :projects='projects' :calculatePercentage='calculatePercentage'></MemberPopup>
         </div>
     </div>
+   
 </template>
 
 <script>
+import MemberPopup from './MemberPopup'
 export default {
     name: 'RosterTile',
+    data() {
+        return {
+            popup: false
+        }
+    },
     props: {
-        member: Object
+        member: Object,
+        projects: Object
+    },
+    components: {
+        MemberPopup
     },
     methods: {
         calculatePercentage() {
             return (this.member.progress / this.member.total) * 100;
+        },
+        setPopup() {
+            this.popup = !this.popup;
         }
     }
 }
@@ -31,7 +50,21 @@ export default {
     height: 30px;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    cursor: pointer;
 }
+
+.member-popup {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 
 #member-name {
     font-weight: bold;
@@ -43,6 +76,12 @@ export default {
     grid-column-start: 2;
     grid-column-end: 3;
 }
+
+#member-link, #member-link:visited, #member-link:hover, #member-link:active{
+    color: black;
+    text-decoration: none;
+}
+
 
 .member-total-progress {
     background-color: #EFEFEF;
@@ -75,7 +114,7 @@ export default {
     }
     .member-total-progress {
         margin-top: 0px;
-        margin-bottom: 0px;
+        margin-bottom: 0px; 
     }
 }
 </style>

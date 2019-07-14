@@ -1,12 +1,12 @@
 <template>
     <div class="project-progress">
-        <div id="title-block">
+        <div id="checkoff-title-block">
             <p>{{ project.title }} - {{ project.subtitle }}</p>
         </div>
-        <div id="progress-block">
-            <p id="percent">{{ calculatePercentage().toFixed(0) }}%</p>
-            <div id="total-progress">
-                <div id="current-progress"
+        <div id="checkoff-progress-block">
+            <p id="checkoff-percent">{{ calculatePercentage().toFixed(0) }}%</p>
+            <div id="checkoff-total-progress">
+                <div id="checkoff-current-progress"
                 :style="{ width: calculatePercentage() + '%'} "></div>
             </div> 
         </div>
@@ -80,7 +80,7 @@ export default {
     line-height: 32px;
     text-align: center;
 }
-#title-block {
+#checkoff-title-block {
     margin-top: 10px;
     font-weight: bold;
     margin-left: 40px;
@@ -90,7 +90,7 @@ export default {
     grid-row-end: 2;
     position: relative;
 }
-#progress-block {
+#checkoff-progress-block {
     margin-top: 10px;
     margin-right: 5px;
     grid-column-start: 2;
@@ -101,7 +101,7 @@ export default {
     display: grid;
     grid-template-columns: 15% 85%;
 }
-#total-progress {
+#checkoff-total-progress {
     background-color: #EFEFEF;
     grid-column-start: 2;
     grid-column-end: 3;
@@ -110,12 +110,12 @@ export default {
     border-radius: 5px;
     height: 10px;
 }
-#current-progress {
+#checkoff-current-progress {
     background-color: #1F6891;
     height: 100%;
     border-radius: 5px;
 }
-#percent {
+#checkoff-percent {
     grid-column-start: 1;
     grid-column-end: 2;
 }
@@ -145,7 +145,7 @@ button:active{
         grid-template-columns: 95% 5%;
         grid-template-rows: 1fr 1fr auto;
     }
-    #title-block {
+    #checkoff-itle-block {
         margin-left: 25px;
         grid-column: 1/2;
         grid-row: 1/2;
@@ -156,7 +156,7 @@ button:active{
         grid-row: 1/2
     }
 
-    #progress-block {
+    #checkoff-progress-block {
         margin-left: 25px;
         grid-column: 1/3;
         grid-row: 2/3;

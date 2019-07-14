@@ -1,6 +1,6 @@
 <template>
   <div class='navbar'>
-    <img class='logo' src='../../public/ieee-logo.png'>
+    <router-link :to="`/login`"><img class='logo' src='../../public/ieee-logo.png'></router-link>
     <ul class='project-list'>
       <li class='project' v-for="routes in links" v-bind:key="routes.id">
         <router-link v-bind:key="routes.id"
@@ -36,6 +36,11 @@ export default {
           id: 3,
           text: 'Aircopter',
           page:'/Aircopter'
+        },
+        {
+          id: 4,
+          text: 'Secure',
+          page: '/secure'
         }
       ]
     }

@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import router from '../router'
+import createPersistedState from 'vuex-persistedstate'
+import Cookies from 'js-cookie'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
+  plugins: [createPersistedState({
+    storage: window.localStorage
+  })],
   state: {
     authenticated: false
   },
@@ -12,8 +16,8 @@ export const store = new Vuex.Store({
     authenticated: state => state.authenticated
   },
   mutations: {
-    updateAuthenticated (state) {
-      state.authenticated = !state.authenticated;
+    updateAuthenticated(state, param) {
+      state.authenticated = param
     }
   }
 });
