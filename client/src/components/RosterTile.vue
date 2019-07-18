@@ -29,7 +29,7 @@ export default {
     },
     props: {
         member: Object,
-        projects: Object
+        projects: Array
     },
     components: {
         MemberPopup

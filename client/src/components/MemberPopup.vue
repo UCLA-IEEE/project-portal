@@ -28,9 +28,13 @@
             </div>
             <div class="popup-project-list">
                 <p id="member-popup-subtitle">Projects</p>
-                <ul id="member-info">
-                    <li v-for="project in this.projects" :key='project.id'>{{project.title}}: {{project.subtitle}}</li>
-                </ul>
+                <div id="member-popup-checkpoint-container" v-for="project in this.projects" :key='project.id'>
+                    <div id="member-popup-checkpoint-incomplete" v-if="member.checkpoints[project.id-1]">
+                    </div>
+                    <div id="member-popup-checkpoint-complete" v-else>
+                    </div>
+                    <p id='member-popup-project-name'>{{project.title}}: {{project.subtitle}}</p>
+                </div>
             </div>
         </div>  
     </div>
@@ -42,7 +46,7 @@ export default {
     props: {
         member: Object,
         calculatePercentage: Function,
-        projects: Object
+        projects: Array
     }
 }
 </script>
@@ -72,6 +76,7 @@ export default {
     font-size: 28px;
     font-weight: bold;
     grid-column: 3/4;
+    margin-right: 15px;
 }
 
 .close-popup:hover, .close-popup:focus {
@@ -97,10 +102,6 @@ export default {
     border-radius: 5px;
 }
 
-.popup-project-list {
-    
-}
-
 .member-checkpoints {
     margin-left: 25px;
 }
@@ -124,7 +125,7 @@ export default {
     grid-column-end: 3;
     height: 60px;
     display: grid;
-    grid-template-columns: 5% 90% 5%;
+    grid-template-columns: 5% 85% 10%;
     grid-column-gap: 20px;
 }
 
@@ -134,4 +135,63 @@ export default {
     color: #1F6891;
     font-size: 18px;
 }
+
+#member-popup-checkpoint-container {
+    display:grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 1fr;
+    width: 100%;
+    height: 35px;
+}
+
+#member-popup-checkpoint-incomplete {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    border: solid 2px #1F6891;
+    margin: 3px 7px 9px 7px;
+    border-radius: 20px;
+}
+
+#member-popup-checkpoint-complete {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    background-color: #1F6891;
+    margin: 3px 7px 9px 7px;
+    border-radius: 20px;
+}
+
+#member-popup-project-name {
+    grid-column: 1/2;
+    grid-row:1/2;
+}
+
+@media(max-width: 1220px)
+{
+    .member-popup-content {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 2fr 3fr;
+    }
+
+    .member-namecard {
+        grid-template-columns: 1/2;
+        grid-template-rows: 1/2;
+        border-bottom: solid #1F6891 1px;
+        border-right: none;
+    }
+
+    #member-popup-checkpoint-container {
+        grid-template-columns: 70% 30%;
+        height: 80px;
+    }
+
+    #member-popup-checkpoint-incomplete {
+        margin: 15px 15px;
+    }
+
+    #member-popup-checkpoint-complete {
+        margin: 15px 15px;
+    }
+} 
+
 </style>
