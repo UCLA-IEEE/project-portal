@@ -104,7 +104,7 @@ export default {
     font-size: 13px;
     text-transform: uppercase;
   }
-  a:hover {
+  .project-list a:hover {
     border-bottom: 1px solid black;
   }
 </style>
