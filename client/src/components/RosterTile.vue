@@ -97,7 +97,7 @@ export default {
     border-radius: 5px;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1110px) {
     .member-progress {
         height: auto;
         grid-template-columns: 1fr;

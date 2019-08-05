@@ -368,26 +368,24 @@ export default {
 
 <style>
     .checkoffs-container {
-        display: grid;
-        grid-template-columns: 5fr 2fr;
-        grid-column-gap: 25px;
-        margin: 25px 125px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
     }
 
     .checkoffs {
+        width: 65%;
         background: #FFFFFF;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);   
-        grid-column: 1 / 2;
-        margin-left: 25px;
     }
 
     .roster {
+        width: 30%;
         text-align: left;
-        grid-column: 2 / 3;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         background: #FFFFFF;
         padding: 30px;
-        margin-right: 25px;
     }
 
     .checkoff-title {
@@ -426,25 +424,20 @@ export default {
     background-color: #1F6891;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 1110px) {
         .checkoffs-container {
-            display: grid;
-            grid-column-gap: 0px;
-            grid-template-columns: 1fr;
-            grid-template-rows: auto auto;
-            grid-row-gap: 25px;
+            display: flex;
+            flex-direction: column;
+            margin: 0px 40px;
         }
 
         .checkoffs {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-            margin-left: 0px;
+            width: 100%;
+            margin-bottom: 50px;
         }
 
         .roster {
-            grid-column: 1 / 2;
-            grid-row: 2 / auto;
-            margin-right: 0px;
+            width: 100%;
         }
 
         #roster-contents {

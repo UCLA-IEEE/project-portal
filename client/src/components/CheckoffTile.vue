@@ -139,7 +139,7 @@ button:active{
     opacity: 0;
 }
 
-@media (max-width: 1000px)
+@media (max-width: 1110px)
 {
     .project-progress {
         grid-template-columns: 95% 5%;
