@@ -92,7 +92,7 @@ export default {
     background-color: #68A0BF;
   }
   .sign-button a {
-    color: white;
+    color: white !important;
     transition: color 0.3s ease;
   }
   .sign-button a:hover {
@@ -109,7 +109,9 @@ export default {
     border-bottom: 1px solid black;
   }
 
-  .project-list a:hover {
+  .project-list a:hover, 
+  .project-list a:focus {
+    color: black; 
     text-decoration: none;
   }
 </style>

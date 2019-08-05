@@ -150,4 +150,8 @@ export default {
     border-bottom: 1px solid white;
     text-decoration: none;
   }
+
+  .mobile-dropdown a:focus {
+    text-decoration: none;
+  }
 </style>
