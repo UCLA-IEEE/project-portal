@@ -34,3 +34,9 @@ SQLITE_DB_URI = 'sqlite:////tmp/test.db'
 
 - You can run `python db-init.py` to create all database tables.
 - You can also run `python db-restart.py` to delete and then recreate all tables. Be aware that running this will delete any data you have stored in your database.
+
+# Deployment
+
+- Client is deployed through deployinator. As long as the `/dist` directory is up-to-date with the recently built version, it should work.
+
+- Server needs to be restarted through cPanel
