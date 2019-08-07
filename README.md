@@ -24,5 +24,13 @@ Any other time you need to develop, all you need to do is `cd` into the `server`
 
 #### DB Setup
 
+- You'll need to create a `config.py` file in the `server/` folder with the variable `SQLITE_DB_URI` defined. You can use the following example
+
+```
+# config.py
+
+SQLITE_DB_URI = 'sqlite:////tmp/test.db'
+```
+
 - You can run `python db-init.py` to create all database tables.
 - You can also run `python db-restart.py` to delete and then recreate all tables. Be aware that running this will delete any data you have stored in your database.
