@@ -14,6 +14,12 @@ export default {
   props: {
     project: String
   },
+  data() {
+    return {
+      calEvents: [],
+      MAX_PAGES: 10
+    }
+  },
   created: function () {
     this.importEvents()
   },
@@ -24,26 +30,36 @@ export default {
       var globalId = 0  // Id element for v-bind:key
       var refined = []
       var nPagesLoaded = 0
+      var finishedPages = false
 
-      var i
-      for (i = 1; i <= this.N_PAGES; i++) {
+      var i = 1
+      while (!finishedPages && i <= this.MAX_PAGES) {
         var xhr = new XMLHttpRequest()
+
+        xhr.onreadystatechange = function () {
+          if (this.status == 400) {   // 400 bad request means past the end of the spreadsheet
+            this.abort()
+            self.finishedPages = true
+          }
+        }
 
         xhr.onload = function () {
           var raw = JSON.parse(this.responseText)
 
-          var pageNum
-          switch (raw.feed.title.$t) {    // Get page number in async xmlhttprequests
-            case 'Fall':                        pageNum = 1;  break;
-            case 'Fall Project Deadlines':      pageNum = 2;  break;
-            case 'Winter':                      pageNum = 3;  break;
-            case 'Winter Project Deadlines':    pageNum = 4;  break;
-            case 'Spring':                      pageNum = 5;  break;
-            case 'Spring Project Deadlines':    pageNum = 6;  break;
+          var extraFormatting = false
+          var isProject = false
+          switch (raw.feed.title.$t) {    // Check page number in async xmlhttprequests
+            case 'Fall Project Deadlines':      isProject = true;        
+            case 'Fall':                        extraFormatting = false;  break;
+            case 'Winter Project Deadlines':    isProject = true;
+            case 'Winter':                      extraFormatting = true;  break;     // Winter and spring pages have extra formatting
+            case 'Spring Project Deadlines':    isProject = true;
+            case 'Spring':                      extraFormatting = true;  break;
+            default:                            return;   // Do nothing if the page is not one of the expected pages
           }
 
           raw = raw.feed.entry
-          if (pageNum > 2)      // Remove extra formatting row for pages 3 - 6
+          if (extraFormatting)      // Remove extra formatting row
             delete raw[1]
           delete raw[0]         // Remove formatting row
 
@@ -51,40 +67,42 @@ export default {
           for (j in raw) {      // Extract necessary fields
             var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
 
-            if (pageNum > 2) {
-              temp.date = self.parseDate(raw[j].gsx$datemdyy.$t)    // Handle different formatting for pages 3 - 6
-            } else {
-              temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)
+            try {
+              temp.date = self.parseDate(raw[j].gsx$datemdyy.$t)
+            }
+            catch {
+              temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)  // To handle inconsistent formatting
             }
             
             /*
              * Skip an event if:
              *   * It has already passed
-             *   * It doesn't belong on the calendar (pages 3 - 6)
+             *   * It doesn't belong on the calendar (extra formatting)
              *   * It isn't relevant to the current project page
              */
 
             if ((temp.date.absolute < new Date().getTime()) || 
-                (pageNum > 2 && raw[j].gsx$leaveoffcalendaryesno.$t.toLowerCase() == 'yes') || 
-                (pageNum % 2 == 0 && raw[j].gsx$project.$t != '' && raw[j].gsx$project.$t != self.project)) { continue; } 
+                (extraFormatting && raw[j].gsx$leaveoffcalendaryesno.$t.toLowerCase() == 'yes') || 
+                (isProject && raw[j].gsx$project.$t != '' && raw[j].gsx$project.$t != self.project)) { continue; } 
 
             temp.id = globalId++
             temp.title = raw[j].gsx$name.$t
             temp.location = raw[j].gsx$location.$t
             refined.push(temp)
           }
-          nPagesLoaded++
+          self.nPagesLoaded++
 
-          if (nPagesLoaded == self.N_PAGES) {  // After loading last page
+          if (self.finishedPages || self.nPagesLoaded == self.MAX_PAGES) {  // After loading last page
             self.calEvents = refined     // Store data in global variable
 
             self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute })   // Sort events by date
             self.calEvents = self.calEvents.slice(0, 4) // Only display first 4 events
           }
         }
-
         xhr.open('GET', 'https://spreadsheets.google.com/feeds/list/19eixWfc2iZl5JbjN2JqfQxr1KIkt-bDJm7NZrAg6NBM/' + i + '/public/values?alt=json')
         xhr.send()
+
+        i++
       }
     },
 
@@ -126,12 +144,6 @@ export default {
       return temp
     }
   },
-  data() {
-    return {
-      calEvents: [],
-      N_PAGES: 6
-    }
-  }
 }
 </script>
 
