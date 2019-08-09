@@ -17,7 +17,8 @@ export default {
   data() {
     return {
       calEvents: [],
-      MAX_PAGES: 10
+      MAX_PAGES: 10,  // Max number of pages the algorithm will attempt to load
+      N_PAGES: 6      // Number of pages the algorithm will import from
     }
   },
   created: function () {
@@ -72,7 +73,7 @@ export default {
             }
             catch {
               temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)  // To handle inconsistent formatting
-            }
+            }   
             
             /*
              * Skip an event if:
@@ -90,9 +91,9 @@ export default {
             temp.location = raw[j].gsx$location.$t
             refined.push(temp)
           }
-          self.nPagesLoaded++
+          nPagesLoaded++
 
-          if (self.finishedPages || self.nPagesLoaded == self.MAX_PAGES) {  // After loading last page
+          if (nPagesLoaded == self.N_PAGES) {  // After loading last page
             self.calEvents = refined     // Store data in global variable
 
             self.calEvents.sort(function(a, b) { return a.date.absolute - b.date.absolute })   // Sort events by date
