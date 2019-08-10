@@ -60,6 +60,7 @@ export default {
           }
 
           raw = raw.feed.entry
+
           if (extraFormatting)      // Remove extra formatting row
             delete raw[1]
           delete raw[0]         // Remove formatting row
@@ -69,9 +70,15 @@ export default {
             var temp = { 'id': null, 'date': null, 'title': null, 'location': null }
 
             try {
+              if (raw[j].gsx$datemdyy.$t === '') {  // Check for dateless entries
+                continue;
+              }
               temp.date = self.parseDate(raw[j].gsx$datemdyy.$t)
             }
             catch {
+              if (raw[j].gsx$datemmddyyyy.$t === '') {
+                continue;
+              }
               temp.date = self.parseDate(raw[j].gsx$datemmddyyyy.$t)  // To handle inconsistent formatting
             }   
             
