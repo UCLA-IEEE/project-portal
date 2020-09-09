@@ -73,6 +73,10 @@ export default {
   margin-right: 40px;
 }
 
+.listing a:hover {
+  text-decoration: none;
+}
+
 @media all and (max-width: 950px) {
   .listing {
     margin-left: 15px;

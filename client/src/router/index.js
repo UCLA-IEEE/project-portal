@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
 import Aircopter from '@/components/Aircopter'
+import Checkoffs from '@/components/Checkoffs'
 import Secure from '@/components/Secure'
 import Spec from '@/components/Spec'
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/aircopter',
       name: 'Aircopter',
       component: Aircopter
+    },
+    {
+      path: '/checkoffs',
+      name: 'Checkoffs',
+      component: Checkoffs
     },
     {
       path: '/secure',

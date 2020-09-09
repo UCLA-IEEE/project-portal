@@ -37,6 +37,7 @@ export default {
 }
 .body {
   margin: auto;
+  color: black !important;
 }
 a {
   text-transform: none;

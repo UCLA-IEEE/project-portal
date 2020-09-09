@@ -84,6 +84,7 @@
     }
     label {
       font-size: 14px;
+      font-weight: normal;
     }
     input, select {
       width: 100%;
