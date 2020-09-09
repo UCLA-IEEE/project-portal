@@ -86,11 +86,20 @@ export default {
 </script>
 
 <style>
+  .mobile-dropdown, 
+  .mobile-dropdown-display, 
+  .mobile-icon, 
+  .mobile-logo, 
+  .mobile-navbar-main {
+    box-sizing: content-box;
+  }
+
   .mobile-navbar-main {
     position: relative;
     display: flex;
     height: 45px;
     padding: 10px 20px;
+    margin: 8px;
     align-items: center;
     justify-content: space-between;
     z-index: 1;
@@ -98,25 +107,29 @@ export default {
     background-color: white;
     border-bottom: .3px solid black;
   }
+
   .mobile-icon {
     height: 18px;
     width: 24px;
     transition: fill .3s;
   }
+
   .rectangle {
     height: 2px;
     width: 24px;
   }
+
   .mobile-logo {
     width: 45px;
   }
 
   .mobile-dropdown {
     position: absolute;
-    top: 13px;
+    top: 5px;
     display: flex;
     height: 40px;
     padding: 10px 5%;
+    margin: 8px;
     align-items: center;
     justify-content: space-around;
     z-index: 0;
@@ -124,13 +137,21 @@ export default {
     background: rgba(31, 104, 145, 0.85);
     transition: top .3s;
   }
+
   .mobile-dropdown-display {
-    top: 73px;
+    top: 65px;
   }
+
   .mobile-dropdown a, .mobile-sign-button a {
     color: white;
   }
+
   .mobile-dropdown a:hover {
     border-bottom: 1px solid white;
+    text-decoration: none;
+  }
+
+  .mobile-dropdown a:focus {
+    text-decoration: none;
   }
 </style>
