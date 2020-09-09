@@ -62,7 +62,12 @@ export default {
   font-family: 'Josefin Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  
+  /* Theme Colors */
+  --blue: #1F6891;
+  --gold: #A48623;
+  --white: #FFFFFF;
+  --off-white: #F8F8F8;
+  --off-black: #2B2B2B;
 }
 </style>
