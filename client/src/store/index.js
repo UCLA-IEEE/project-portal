@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import Cookies from 'js-cookie'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -10,14 +10,46 @@ export const store = new Vuex.Store({
     storage: window.localStorage
   })],
   state: {
-    authenticated: false
+    status: "",
+    user: null
   },
   getters: {
-    authenticated: state => state.authenticated
+    authStatus: state => state.status,
+    authenticated: state => state.user !== null,
+    user: state => state.user
   },
   mutations: {
-    updateAuthenticated(state, param) {
-      state.authenticated = param
+    auth_success(state, user) {
+      state.status = "success";
+      state.user = user;
+    },
+    auth_error(state) {
+      state.status = "error";
+      state.user = null;
+    },
+    logout(state) {
+      state.status = "";
+      state.user = null;
+    }
+  },
+  actions: {
+    login({ commit }, user) {
+      return axios({
+        method: "POST",
+        "url": "http://localhost:5000/auth/login",
+        "data": {
+          username: user.username,
+          password: user.password
+        },
+        "headers": { "Content-Type": "application/json",
+                     "Access-Control-Allow-Origin": '*' }
+      })
+      .then(res => {
+        commit('auth_success', res.data)
+      })
+      .catch(() => {
+        commit('auth_error')
+      })
     }
   }
 });

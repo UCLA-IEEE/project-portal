@@ -50,8 +50,8 @@ export default {
       this.$router.replace({ name: "Login" });
     },
     handleLogout() {
-      this.$store.commit('updateAuthenticated', false);
-      if(!this.$store.state.authenticated) {
+      this.$store.commit('logout');
+      if(!this.$store.getters.authenticated) {
         this.$router.replace({ name: "Login" });
       }
     }

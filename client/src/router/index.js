@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import { store } from '@/store'
 import Login from '@/components/Login'
 import OPS from '@/components/OPS'
 import Micromouse from '@/components/Micromouse'
@@ -10,7 +11,7 @@ import Spec from '@/components/Spec'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -19,7 +20,16 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      beforeEnter: (to, from, next) => {
+        // If already logged in, redirect to secure
+        if (store.getters.authenticated) {
+          next('/secure')
+        }
+        else {
+          next()
+        }
+      }
     },
     {
       path: '/ops',
@@ -53,3 +63,18 @@ export default new Router({
     }
   ]
 })
+
+// Redirect to login if user isn't authenticated
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/login'];
+  const authRequired = !publicPages.includes(to.path)
+
+  if (!store.getters.authenticated && authRequired) {
+    next('/login')
+  }
+  else {
+    next()
+  }
+})
+
+export {router as default}
