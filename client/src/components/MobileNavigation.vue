@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .mobile-dropdown, 
   .mobile-dropdown-display, 
   .mobile-icon, 

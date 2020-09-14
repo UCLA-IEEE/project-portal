@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .listing {
   margin-left: 130px;
   margin-right: 40px;

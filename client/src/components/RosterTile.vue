@@ -45,7 +45,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .member-progress {
     height: 30px;
     display: grid;

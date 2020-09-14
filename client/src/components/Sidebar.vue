@@ -60,7 +60,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .sidebar {
   margin: 35px 0px;
   padding: 0px 90px 0px 35px;

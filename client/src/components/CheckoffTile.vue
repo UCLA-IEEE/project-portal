@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .project-progress {
     display: grid;
     grid-template-columns: 60% 35% auto;
