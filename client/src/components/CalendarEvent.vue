@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .calendar-event {
   width: 250px;
   height: 55px;

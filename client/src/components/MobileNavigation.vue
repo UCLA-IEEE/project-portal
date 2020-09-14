@@ -11,7 +11,7 @@
     <div :class="[dropdownBase, displayMenu ? dropdownDisplay : '']" :style="{ width: dropWidth }">
       <router-link class="mobile-links" v-for="routes in links"
         :key="routes.id" :to="`${routes.page}`">{{routes.text}}</router-link>
-      <router-link class="mobile-links" :to="`/Login`" v-if="!this.$store.state.authenticated"
+      <router-link class="mobile-links" :to="`/Login`" v-if="!this.$store.getters.authenticated"
         @click="redirectLogin()">Sign In</router-link>
       <router-link class="mobile-links" :to="`/Login`" v-else
         @click.native="handleLogout()">Sign Out</router-link>
@@ -65,8 +65,8 @@ export default {
       this.$router.replace({ name: "Login" });
     },
     handleLogout() {
-      this.$store.commit('updateAuthenticated', false);
-      if(!this.$store.state.authenticated) {
+      this.$store.commit('logout');
+      if(!this.$store.getters.authenticated) {
         this.$router.replace({ name: "Login" });
       }
     }
@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .mobile-dropdown, 
   .mobile-dropdown-display, 
   .mobile-icon, 

@@ -12,7 +12,6 @@
 </template>
 
 <script>
-    import { userService } from '../services';
     export default {
         name: 'Login',
         data() {
@@ -33,14 +32,15 @@
                 return;
               }
 
-              userService.login(username, password)
-              .then( value => {
-                this.accepted = true;
-                this.$store.commit('updateAuthenticated', true);
-                this.$router.replace({ name: "Secure" });
-              })
-              .catch( err => {
-                this.accepted = false;
+              this.$store.dispatch('login', { username, password })
+              .then(() => {
+                if (this.$store.getters.authenticated) {
+                  this.accepted = true;
+                  this.$router.replace({ name: 'Secure' });
+                }
+                else {
+                  this.accepted = false;
+                }
               })
             },
             isValid() {

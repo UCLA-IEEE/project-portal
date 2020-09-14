@@ -17,7 +17,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #arrow {
     margin-top: 10px;
     grid-column-start: 3;

@@ -50,8 +50,8 @@ export default {
       this.$router.replace({ name: "Login" });
     },
     handleLogout() {
-      this.$store.commit('updateAuthenticated', false);
-      if(!this.$store.state.authenticated) {
+      this.$store.commit('logout');
+      if(!this.$store.getters.authenticated) {
         this.$router.replace({ name: "Login" });
       }
     }
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .navbar {
     border-bottom: 0.3px solid black;
     height: 60px;

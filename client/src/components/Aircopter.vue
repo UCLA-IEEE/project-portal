@@ -39,7 +39,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .ap-page {
   display: grid;
   grid-template-columns: auto 350px;

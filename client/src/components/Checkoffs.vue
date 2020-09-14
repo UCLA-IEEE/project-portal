@@ -366,7 +366,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .checkoffs-container {
         margin: 0 auto;
         display: flex;

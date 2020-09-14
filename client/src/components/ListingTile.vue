@@ -21,7 +21,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .tile {
   padding: 8px 25px;
   margin: 20px 0px;

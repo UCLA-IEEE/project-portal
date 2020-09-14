@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .member-popup-content {
     display: grid;
     grid-template-columns: 2fr 3fr;
