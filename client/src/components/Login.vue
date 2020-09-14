@@ -36,7 +36,7 @@
               .then(() => {
                 if (this.$store.getters.authenticated) {
                   this.accepted = true;
-                  this.$router.replace({ name: 'Secure' });
+                  this.$router.push({ name: 'Secure' });
                 }
                 else {
                   this.accepted = false;
