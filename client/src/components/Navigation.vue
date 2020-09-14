@@ -1,6 +1,6 @@
 <template>
   <div id='navbar'>
-    <router-link :to="`/login`"><img class='logo' src='../../public/ieee-logo.png'></router-link>
+    <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.svg'></router-link>
     <ul class='project-list'>
       <li class='project' v-for="routes in links" v-bind:key="routes.id">
         <router-link v-bind:key="routes.id"
@@ -69,7 +69,7 @@ export default {
 
   #navbar .logo {
     float: left;
-    width: 160px;
+    height: 48px;
     margin-top: 5px;
   }
   #navbar .project-list {
