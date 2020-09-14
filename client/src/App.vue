@@ -20,13 +20,6 @@ export default {
       }
     }
   },
-  updated() {
-    this.$nextTick(function () {
-      if(!this.$store.state.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
-    })
-  },
   components: {
     'Navigation': Navigation,
     'MobileNavigation': MobileNavigation
