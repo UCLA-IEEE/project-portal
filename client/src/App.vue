@@ -74,6 +74,10 @@ export default {
   color: var(--off-black);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--off-white);
+  min-height: 100vh;
+  overflow: auto;
 }
 
 /* Text */
