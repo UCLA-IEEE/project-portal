@@ -1,18 +1,35 @@
 <template>
-  <div id='navbar'>
-    <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.svg'></router-link>
-    <ul class='project-list'>
-      <li class='project' v-for="routes in links" v-bind:key="routes.id">
-        <router-link v-bind:key="routes.id"
-        :to="`${routes.page}`">{{routes.text}}</router-link>
-      </li>
-      <button class='sign-button' v-if="!this.$store.state.authenticated" v-on:click="redirectLogin()">
-        <router-link :to="`/Login`">Sign In</router-link>
-      </button>
-      <button class='sign-button' v-else v-on:click="handleLogout()">
-        <router-link :to="`/Login`">Sign Out</router-link>
-      </button>
-    </ul>
+  <div>
+    <div id='navbar'>
+      <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.svg'></router-link>
+
+      <div v-if="onPublic">
+        <ul class='link-list'>
+          <li class='link'>
+            <router-link class="font-fix" :to="`/register`">Sign Up</router-link>
+          </li>
+        </ul>
+        <router-link class='main-button' :to="`/login`" tag="button">
+          <p class="font-fix">Sign In</p>
+        </router-link>
+      </div>
+
+      <div v-else>
+        <ul class='link-list'>
+          <li class='link' v-for="routes in links" :key="routes.id">
+            <router-link class="font-fix" :key="routes.id" :to="`${routes.page}`">{{routes.text}}</router-link>
+          </li>
+        </ul>
+        <router-link class='main-button' :to="`/me`" tag="button">
+          <p class="font-fix">Me</p>
+        </router-link>
+      </div>
+
+    </div>
+
+    <div id='mobile-navbar'>
+
+    </div>
   </div>
 </template>
 
@@ -24,95 +41,84 @@ export default {
       links: [
         {
           id: 1,
-          text: 'OPS',
-          page:'/OPS'
+          text: 'ops',
+          page:'/ops'
         },
         {
           id: 2,
-          text: 'Micromouse',
-          page:'/Micromouse'
+          text: 'mm',
+          page:'/mm'
         },
         {
           id: 3,
-          text: 'Aircopter',
-          page:'/Aircopter'
+          text: 'ap',
+          page:'/ap'
         },
         {
           id: 4,
-          text: 'Secure',
-          page: '/secure'
+          text: 'dav',
+          page: '/dav'
         }
       ]
     }
   },
-  methods: {
-    redirectLogin() {
-      this.$router.replace({ name: "Login" });
-    },
-    handleLogout() {
-      this.$store.commit('logout');
-      if(!this.$store.getters.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
+  computed: {
+    onPublic: function() {
+      const publicPages = ["Login", "Register", "Reset", "Verify"]
+      return publicPages.includes(this.$route.name)
     }
   }
 }
 </script>
 
 <style>
+  /* Desktop Navbar */
   #navbar {
-    border-bottom: 0.3px solid black;
-    height: 60px;
-    margin: 10px 100px;
-    padding: 0 50px 0px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin: 10px 0;
+    padding: 0 50px;
   }
 
   #navbar .logo {
-    float: left;
     height: 48px;
-    margin-top: 5px;
   }
-  #navbar .project-list {
-    float: right;
-    margin: 10px 5px;
+
+  #navbar .link-list {
+    margin: 10px 10px 10px 5px;
+
+    display: inline-flex;
+    align-items: center;
   }
-  #navbar .project {
+
+  #navbar li {
     display: inline;
     margin: 0 30px;
   }
-  #navbar .sign-button {
-    background-color: #1F6891;
-    color: white;
-    padding: 8px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-left: 30px;
-    transition: background-color 0.2s ease;
-  }
-  #navbar .sign-button:hover {
-    background-color: #68A0BF;
-  }
-  #navbar .sign-button a {
-    color: white !important;
-    transition: color 0.3s ease;
-  }
-  #navbar .sign-button a:hover {
-    border-bottom: none;
-  }
-  #navbar a {
-    color: black;
-    text-decoration: none;
-    font-size: 13px;
-    text-transform: uppercase;
-  }
-  #navbar .project a:hover {
-    color: black;
-    border-bottom: 1px solid black;
+
+  #navbar .main-button {
+    display: inline-block;
+    font-size: 14px;
+    padding: 7px 15px;
+    width: 90px;
   }
 
-  #navbar .project-list a:hover, 
-  #navbar .project-list a:focus {
-    color: black; 
+  #navbar a {
+    color: var(--off-black);
     text-decoration: none;
+    text-transform: uppercase;
   }
+
+  #navbar .link-list a:hover, 
+  #navbar .link-list a:focus,
+  #navbar .link-list a.router-link-active {
+    color: var(--off-black);
+    border-bottom: 1px solid var(--off-black);
+  }
+
+  /* Mobile Navbar */
+
+  
 </style>

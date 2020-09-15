@@ -112,7 +112,7 @@ textarea {
 
   border: 2px solid var(--gray);
   border-radius: 5px;
-  transition: border-color .3s;
+  transition: border-color .2s;
 }
 
 input:focus,
@@ -132,19 +132,31 @@ textarea:focus::placeholder {
 button {
   background-color: transparent;
   border: 2px solid var(--blue);
+  border-radius: 5px;
   color: var(--blue);
   font-size: 12px;
   text-transform: uppercase;
 
   padding: 7px 15px 5px;
 
-  transition: .3s;
+  transition: background-color .2s, color .2s;
 }
 
 button:hover,
 button.selected {
   background-color: var(--blue);
   color: var(--white)
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Font Fix */
+
+.font-fix {
+  padding-top: .2em;
+  margin-bottom: 0;
 }
 
 /* Default Card */
