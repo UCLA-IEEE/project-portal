@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id='navbar'>
+    <div id='navbar' :class="{'shadow--6dp': isScrolled}">
       <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.svg'></router-link>
 
       <div style="display: flex;" v-if="onPublic">
@@ -25,7 +25,7 @@
           <router-link class='main-button' :to="`/me`" tag="button">
             <p class="font-fix">Me</p>
           </router-link>
-          <div class="drop card text-center">
+          <div class="drop card text-center" :class="[isScrolled ? 'shadow--4dp' : 'shadow--2dp']">
             <a @click="logout">
               Sign Out
             </a>
@@ -42,10 +42,12 @@
 </template>
 
 <script>
+import { debounce } from "debounce";
 export default {
   name: 'Nav',
   data() {
     return {
+      isScrolled: false,
       links: [
         {
           id: 1,
@@ -70,11 +72,24 @@ export default {
       ]
     }
   },
+  created() {
+    this.debouncedHandleScroll = debounce(this.handleScroll, 0);
+    window.addEventListener("scroll", this.debouncedHandleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.debouncedHandleScroll);
+  },
   methods: {
     logout() {
       this.$store.commit('logout');
       if (!this.$store.getters.authenticated)
         this.$router.push({name: "Login"});
+    },
+    handleScroll() {
+      if (window.scrollY > 10)
+        this.isScrolled = true;
+      else
+        this.isScrolled = false;
     }
   },
   computed: {
@@ -93,8 +108,13 @@ export default {
     align-items: center;
     justify-content: space-between;
 
-    margin: 10px 0;
-    padding: 0 20px;
+    position: fixed;
+    background-color: var(--off-white);
+
+    width: 100%;
+    padding: 10px 20px;
+
+    transition: box-shadow .2s;
   }
 
   #navbar .logo {
@@ -140,11 +160,11 @@ export default {
     display: inline-block;
     position: relative;
 
-    width: 100px;
+    width: 106px;
     height: 40.8px;
 
-    padding: 0 5px;
-    margin: 0 -5px;
+    padding: 0 8px;
+    margin: 0 -8px;
 
     overflow: hidden;
 
@@ -152,8 +172,8 @@ export default {
   }
 
   #navbar .button-wrapper:hover {
-    height: 82.8px;
-    margin-bottom: -42px;
+    height: 85.8px;
+    margin-bottom: -45px;
 
     transition: all 0s;
   }
@@ -166,10 +186,6 @@ export default {
   #navbar .button-wrapper:hover .drop {
     opacity: 1;
     top: 0;
-
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   }
 
   #navbar .drop {
@@ -204,7 +220,7 @@ export default {
 
   @media only screen and (min-width: 992px) {
     #navbar {
-      padding: 0 50px;
+      padding: 10px 50px;
     }
   }
 </style>

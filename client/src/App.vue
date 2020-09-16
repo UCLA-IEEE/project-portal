@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
+    <div id="navbar-fill"></div>
     <router-view/>
   </div>
 </template>
@@ -36,6 +37,10 @@ export default {
   background-color: var(--off-white);
   min-height: 100vh;
   overflow: auto;
+}
+
+#navbar-fill {
+  height: 68px;
 }
 
 /* Text */
