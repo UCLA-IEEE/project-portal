@@ -89,12 +89,12 @@ export default {
 <style>
   /* Desktop Navbar */
   #navbar {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
 
     margin: 10px 0;
-    padding: 0 50px;
+    padding: 0 20px;
   }
 
   #navbar .logo {
@@ -191,5 +191,20 @@ export default {
 
   /* Mobile Navbar */
 
+  /* Media Queries */
+  @media only screen and (min-width: 768px) {
+    #navbar {
+      display: flex;
+    }
 
+    #mobile-navbar {
+      display: none;
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    #navbar {
+      padding: 0 50px;
+    }
+  }
 </style>
