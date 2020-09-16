@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id='navbar' :class="{'shadow--6dp': isScrolled}">
-      <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.svg'></router-link>
+      <router-link :to="`/login`"><img class='logo' src='../../public/desktop-logo.png'></router-link>
 
       <div style="display: flex;" v-if="onPublic">
         <ul class='link-list'>
@@ -36,7 +36,43 @@
     </div>
 
     <div id='mobile-navbar'>
+      <div class="main" :class="{'shadow--6dp': isScrolled}">
+        <router-link :to="`/login`"><img class='logo' src='../../public/mobile-logo.png'></router-link>
 
+        <div class="hamburger" :class="{change : sidebarActive}" @click="toggleSidebar">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+      </div>
+
+      <div :class="['card', 'sidebar-base', sidebarActive ? 'active' : '', isScrolled ? 'shadow--6dp' : 'shadow--2dp']">
+
+        <div class='link-container' v-if="onPublic">
+          <router-link class='main-button' :to="`/login`" tag="button" @click.native="toggleSidebar">
+            <p class="font-fix">Sign In</p>
+          </router-link>
+
+          <router-link class="link font-fix text-center" :to="`/register`" @click.native="toggleSidebar">Sign Up</router-link>
+        </div>
+
+        <div class='link-container' v-else>
+          <router-link class='main-button' :to="`/me`" tag="button" @click.native="toggleSidebar">
+            <p class="font-fix">Me</p>
+          </router-link>
+
+          <a class="link font-fix text-center" style="cursor: pointer;" @click="logout">
+            Sign Out
+          </a>
+
+          <hr>
+
+          <router-link class="link font-fix text-center" v-for="routes in links" :key="routes.id" :to="`${routes.page}`" @click.native="toggleSidebar">
+            {{routes.text}}
+          </router-link>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +84,7 @@ export default {
   data() {
     return {
       isScrolled: false,
+      sidebarActive: false,
       links: [
         {
           id: 1,
@@ -82,14 +119,19 @@ export default {
   methods: {
     logout() {
       this.$store.commit('logout');
-      if (!this.$store.getters.authenticated)
+      if (!this.$store.getters.authenticated) {
+        this.toggleSidebar();
         this.$router.push({name: "Login"});
+      }
     },
     handleScroll() {
       if (window.scrollY > 10)
         this.isScrolled = true;
       else
         this.isScrolled = false;
+    },
+    toggleSidebar() {
+      this.sidebarActive = !this.sidebarActive;
     }
   },
   computed: {
@@ -206,6 +248,109 @@ export default {
   }
 
   /* Mobile Navbar */
+  #mobile-navbar {
+    position: fixed;
+    width: 100%;
+  }
+  
+  #mobile-navbar .main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: var(--off-white);
+
+    padding: 10px 20px;
+
+    transition: box-shadow .2s;
+  }
+
+  #mobile-navbar .logo {
+    height: 48px;
+  }
+
+  #mobile-navbar .hamburger {
+    cursor: pointer;
+  }
+
+  #mobile-navbar .bar1,
+  #mobile-navbar .bar2,
+  #mobile-navbar .bar3 {
+    width: 35px;
+    height: 4px;
+    background-color: var(--blue);
+    margin: 6px 0;
+    transition: 0.3s;
+    border-radius: 500px;
+  }
+
+  /* Rotate first bar */
+  #mobile-navbar .change .bar1 {
+    transform: translateY(10px) rotate(-45deg);
+  }
+
+  /* Fade out the second bar */
+  #mobile-navbar .change .bar2 {
+    opacity: 0;
+  }
+
+  /* Rotate last bar */
+  #mobile-navbar .change .bar3 {
+    transform: translateY(-10.5px) rotate(45deg);
+  }
+
+  #mobile-navbar .sidebar-base {
+    opacity: 0;
+    position: absolute;
+    float: right;
+    padding: 15px;
+    right: -120px;
+
+    transition: all .2s
+  }
+
+  #mobile-navbar .sidebar-base.active {
+    display: block;
+    opacity: 1;
+    right: 0;
+  }
+
+  #mobile-navbar .link-container {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mobile-navbar hr {
+    width: 90%;
+    height: 1px;
+    margin: 20px auto 0;
+    background-color: var(--blue);
+    color: var(--blue);
+    border-radius: 50px;
+  }
+
+  #mobile-navbar .main-button {
+    width: 90px;
+    padding: 7px 0;
+  }
+
+  #mobile-navbar .sidebar-base a {
+    color: var(--off-black);
+    text-decoration: none;
+    text-transform: uppercase;
+
+    margin-top: 20px;
+    border-bottom: 1px solid transparent;
+  }
+
+  #mobile-navbar .sidebar-base a:focus,
+  #mobile-navbar .sidebar-base a:hover, 
+  #mobile-navbar .sidebar-base a.router-link-active {
+    color: var(--off-black);
+    border-bottom: 1px solid var(--off-black);
+  }
 
   /* Media Queries */
   @media only screen and (min-width: 768px) {
