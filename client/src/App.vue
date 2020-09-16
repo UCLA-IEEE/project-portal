@@ -1,58 +1,17 @@
 <template>
   <div id="app">
-    <MobileNavigation v-if="mobile" :width="windowSize.width"/>
-    <Navigation v-else></Navigation>
+    <Navigation></Navigation>
+    <div id="navbar-fill"></div>
     <router-view/>
   </div>
 </template>
 
 <script>
 import Navigation from './components/Navigation'
-import MobileNavigation from './components/MobileNavigation'
 export default {
   name: 'app',
-  data() {
-    return {
-      authenticated: false,
-      windowSize: {
-        width: 0,
-        height: 0
-      }
-    }
-  },
-  updated() {
-    this.$nextTick(function () {
-      if(!this.$store.state.authenticated) {
-        this.$router.replace({ name: "Login" });
-      }
-    })
-  },
   components: {
-    'Navigation': Navigation,
-    'MobileNavigation': MobileNavigation
-  },
-  mounted: function() {
-    window.addEventListener("resize", this.handleResize)
-    this.handleResize()
-  },
-  beforeDestroy: function() {
-    window.removeEventListener("resize", this.handleResize)
-  },
-  methods: {
-    handleResize: function() {
-      var w = document.documentElement.clientWidth || document.body.clientWidth
-      var h = document.documentElement.clientHeight || document.body.clientHeight
-      this.windowSize.width = w
-      this.windowSize.height = h
-    }
-  },
-  computed: {
-    mobile: function() {
-      if (this.windowSize.width < 1105)
-        return true
-      else
-        return false
-    }
+    'Navigation': Navigation
   }
 }
 </script>
@@ -74,6 +33,14 @@ export default {
   color: var(--off-black);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--off-white);
+  min-height: 100vh;
+  overflow: auto;
+}
+
+#navbar-fill {
+  height: 68px;
 }
 
 /* Text */
@@ -115,7 +82,7 @@ textarea {
 
   border: 2px solid var(--gray);
   border-radius: 5px;
-  transition: border-color .3s;
+  transition: border-color .2s;
 }
 
 input:focus,
@@ -135,19 +102,31 @@ textarea:focus::placeholder {
 button {
   background-color: transparent;
   border: 2px solid var(--blue);
+  border-radius: 5px;
   color: var(--blue);
   font-size: 12px;
   text-transform: uppercase;
 
   padding: 7px 15px 5px;
 
-  transition: .3s;
+  transition: background-color .2s, color .2s;
 }
 
 button:hover,
 button.selected {
   background-color: var(--blue);
   color: var(--white)
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Font Fix */
+
+.font-fix {
+  padding-top: .2em;
+  margin-bottom: 0;
 }
 
 /* Default Card */

@@ -37,13 +37,18 @@ const router = new Router({
       component: OPS
     },
     {
-      path: '/micromouse',
+      path: '/mm',
       name: 'Micromouse',
       component: Micromouse
     },
     {
-      path: '/aircopter',
+      path: '/ap',
       name: 'Aircopter',
+      component: Aircopter
+    },
+    {
+      path: '/dav',
+      name: 'DAV',
       component: Aircopter
     },
     {
@@ -66,7 +71,7 @@ const router = new Router({
 
 // Redirect to login if user isn't authenticated
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login'];
+  const publicPages = ['/login', '/register', '/reset', '/verify'];
   const authRequired = !publicPages.includes(to.path)
 
   if (!store.getters.authenticated && authRequired) {
