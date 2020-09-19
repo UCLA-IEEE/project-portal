@@ -9,13 +9,13 @@
     <p class="section-title">Keep Updated</p>
       <div class="sidebar-media">
         <a :href="facebook">
-          <img class="facebook" src="../../public/facebook_icon.png"/>
+          <img class="facebook" src="../../public/facebook.png"/>
         </a>
         <a href="https://uclaieee.slack.com/">
-          <img class="slack" src="../../public/slack_icon.png"/>
+          <img class="slack" src="../../public/slack.png"/>
         </a>
         <a href="https://www.instagram.com/uclaieee/">
-          <img class="instagram" src="../../public/instagram_icon.png"/>
+          <img class="instagram" src="../../public/instagram.png"/>
         </a>
       </div>
   </div>
