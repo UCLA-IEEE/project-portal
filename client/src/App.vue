@@ -92,6 +92,10 @@ textarea:focus {
   border-color: var(--blue);
 }
 
+input:not(:placeholder-shown):invalid {
+  border-color: var(--red);
+}
+
 input:focus::placeholder,
 textarea:focus::placeholder {
   color: transparent;

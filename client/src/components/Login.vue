@@ -1,103 +1,112 @@
 <template>
-    <div id="login">
-        <h1>Login</h1>
-        <p class='subtitle'>Sign in to track your project progress!</p>
-        <label for="username">Email</label>
-        <input type="text" id='username' name="username" v-model="username" placeholder="joebruin@g.ucla.edu"/>
+  <div id="login-wrapper">
+    <div id="login" class="card shadow--2dp text-center">
+      <h1>Sign In</h1>
+      <h3>Sign in to track your project progress</h3>
+
+      <form @submit.prevent="handleLogin()">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" v-model="username" placeholder="joebruin" required/>
         <label for="password">Password</label>
-        <input type="password" id='password' name="password" v-model="password" placeholder="Password" @keyup.enter="handleLogin()"/>
-        <p class='error-message' v-show="isValid()">Invalid username or password.</p>
-        <button type="button" v-on:click="handleLogin()">Login</button>
+        <input type="password" id='password' name="password" v-model="password" placeholder="Password" required/>
+        <p :class="['error-message', !accepted ? 'visible' : '']">Invalid username or password</p>
+        <button type="submit"><p class="font-fix">Sign In</p></button>
+      </form>
+      
+      <p class="links">
+        <router-link :to="{name: 'Register'}">Create an account</router-link> | <router-link :to="{name: 'Reset'}">Forgot my password</router-link>
+      </p>
     </div>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: 'Login',
-        data() {
-            return {
-                username: '',
-                password: '',
-                submitted: false,
-                accepted: true
-            }
-        },
-        methods: {
-            handleLogin() {
-              this.submitted = true;
-              const { username, password } = this;
+  export default {
+    name: 'Login',
+    data() {
+      return {
+        username: '',
+        password: '',
+        accepted: true
+      }
+    },
+    methods: {
+      handleLogin() {
+        this.accepted = true;
+        const { username, password } = this;
 
-              // Stop here if form is invalid
-              if (!(username && password)) {
-                return;
-              }
-
-              this.$store.dispatch('login', { username, password })
-              .then(() => {
-                if (this.$store.getters.authenticated) {
-                  this.accepted = true;
-                  this.$router.push({ name: 'Secure' });
-                }
-                else {
-                  this.accepted = false;
-                }
-              })
-            },
-            isValid() {
-              return this.submitted && (!this.password || !this.username || !this.accepted);
-            }
-        }
+        this.$store.dispatch('login', { username, password })
+        .then(() => {
+          if (this.$store.getters.authenticated) {
+            this.accepted = true;
+            this.$router.push({ name: 'Secure' });
+          }
+          else {
+            this.accepted = false;
+          }
+        })
+      }
     }
+  }
 </script>
 
-<style scoped>
+<style>
+  #login-wrapper {
+    background-color: var(--blue);
+    padding-top: calc(50vh - 250px);
+    min-height: calc(100vh - 68px);
+  }
+
+  #login {
+    display: block;
+    width: 330px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+
+  #login h1 {
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-top: 0;
+  }
+
+  #login h3 {
+    margin-top: 0;
+  }
+
+  #login label {
+    float: left;
+    margin-left: 5px;
+    margin-bottom: 0;
+
+    font-weight: normal;
+  }
+
+  #login input {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    padding-top: 0.3em;
+  }
+
+  #login .error-message {
+    color: var(--red);
+    visibility: hidden;
+  }
+
+  #login .visible {
+    visibility: visible;
+  }
+
+  #login .links {
+    margin: 20px 0 0;
+  }
+
+  /* Media Queries */
+  @media only screen and (min-width: 480px) {
     #login {
-        width: 400px;
-        border: 1px solid #CCCCCC;
-        border-radius: 12px;
-        margin: auto;
-        margin-top: 100px;
-        padding: 15px;
-        color: #1F6891;
+      width: 440px;
     }
-    #login h1 {
-      font-size: 16px;
-      text-transform: uppercase;
-      margin: 0;
-    }
-    .subtitle {
-      font-size: 14px;
-      margin: 0 0 10px 0;
-    }
-    #login button {
-      background-color: #1F6891;
-      color: white;
-      border-radius: 5px;
-      font-size: 12px;
-      padding: 5px 20px;
-      border: 0;
-      transition: background-color 0.3s ease;
-    }
-    #login button:hover {
-      background-color: #68A0BF;
-      cursor: pointer;
-    }
-    label {
-      font-size: 14px;
-      font-weight: normal;
-    }
-    input, select {
-      width: 100%;
-      padding: 5px 10px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-    .error-message {
-      color: #d02626;
-      margin: 0 0 10px 0;
-      font-size: 12px;
-    }
+  }
 </style>
