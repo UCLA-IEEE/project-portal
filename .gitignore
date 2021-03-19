@@ -2,6 +2,10 @@
 prod.db
 server/tmp/
 
+# Config files
+config.json
+config.py
+
 # For OSX
 .DS_Store
 
