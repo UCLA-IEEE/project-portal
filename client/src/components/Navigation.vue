@@ -151,6 +151,7 @@ export default {
     justify-content: space-between;
 
     position: fixed;
+    z-index: 1;
     background-color: var(--off-white);
 
     width: 100%;
@@ -250,6 +251,7 @@ export default {
   /* Mobile Navbar */
   #mobile-navbar {
     position: fixed;
+    z-index: 1;
     width: 100%;
   }
   

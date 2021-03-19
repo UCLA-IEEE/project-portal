@@ -29,7 +29,7 @@ Any other time you need to develop, all you need to do is `cd` into the `server`
 ```
 # config.py
 
-SQLITE_DB_URI = 'sqlite:////tmp/test.db'
+SQLITE_DB_URI = 'sqlite:///tmp/test.db'
 ```
 
 - You can run `python db-init.py` to create all database tables.
