@@ -3,15 +3,19 @@
     <Navigation></Navigation>
     <div id="navbar-fill"></div>
     <router-view/>
+    <Footer></Footer>
+    <div id="footer-fill"></div>
   </div>
 </template>
 
 <script>
+import Footer from './components/Footer.vue'
 import Navigation from './components/Navigation'
 export default {
   name: 'app',
   components: {
-    'Navigation': Navigation
+    'Navigation': Navigation,
+    'Footer': Footer
   }
 }
 </script>
@@ -37,9 +41,12 @@ export default {
   background-color: var(--off-white);
   min-height: 100vh;
   overflow: auto;
+
+  position: relative;
 }
 
-#navbar-fill {
+#navbar-fill,
+#footer-fill {
   height: 68px;
 }
 

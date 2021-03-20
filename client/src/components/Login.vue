@@ -17,18 +17,12 @@
         <router-link :to="{name: 'Register'}">Create an account</router-link> | <router-link :to="{name: 'Reset'}">Forgot my password</router-link>
       </p>
     </div>
-
-    <Footer/>
   </div>
 </template>
 
 <script>
-  import Footer from "./Footer"
   export default {
     name: 'Login',
-    components: {
-      Footer
-    },
     data() {
       return {
         username: '',
@@ -61,7 +55,7 @@
     position: relative;
     background-color: var(--blue);
     padding-top: calc(50vh - 250px);
-    min-height: calc(100vh - 68px);
+    min-height: calc(100vh - 2*68px);
   }
 
   #login {
